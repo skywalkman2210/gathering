@@ -1,0 +1,7 @@
+﻿INSERT [dbo].[aspnet_SchemaVersions] ([Feature], [CompatibleSchemaVersion], [IsCurrentVersion]) 
+VALUES (N'common', N'1', 1)
+,(N'health monitoring', N'1', 1)
+,(N'membership', N'1', 1)
+,(N'personalization', N'1', 1)
+,(N'profile', N'1', 1)
+,(N'role manager', N'1', 1)

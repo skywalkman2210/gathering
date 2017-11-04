@@ -1,0 +1,6 @@
+﻿INSERT [dbo].[AspNetRoles] ([Id], [Name]) 
+VALUES (N'1', N'Admin')
+,(N'2', N'Teacher')
+,(N'3', N'Student')
+,(N'4', N'Parent')
+,(N'5', N'Administrator')

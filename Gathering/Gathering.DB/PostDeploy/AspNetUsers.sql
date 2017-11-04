@@ -1,0 +1,2 @@
+﻿INSERT [dbo].[AspNetUsers] ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName]) 
+VALUES (N'0070f4db-d3af-4ae2-9703-cf5a4a55f95b', N'skywalkman22_10@yahoo.com', 0, N'AJEvFbPng/rQ264p4TVPrgG9K/7XxLE5+LK1knx1I0fiyfraw/Rj/Q3IB1jQszuCDw==', N'487bac5b-bb32-49c8-b969-eb9b00b9eeb7', NULL, 0, 0, NULL, 1, 0, N'skywalkman22_10@yahoo.com')
