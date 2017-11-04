@@ -79,6 +79,12 @@ namespace Gathering.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "I am a(n) ...")]
+        public string AccountRole { get; set; }
+
+        [Display(Name = "School Name")]
+        public string SchoolName { get; set; }
     }
 
     public class ResetPasswordViewModel
