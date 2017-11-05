@@ -208,6 +208,17 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="Assignments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GradeId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PointsEarned" Type="int" />
+          <Property Name="PointsTotal" Type="int" Nullable="false" />
+          <Property Name="DueDate" Type="datetime2" Precision="7" />
+        </EntityType>
         <EntityType Name="Courses">
           <Key>
             <PropertyRef Name="Id" />
@@ -223,8 +234,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudentId" Type="int" Nullable="false" />
           <Property Name="CourseId" Type="int" Nullable="false" />
-          <Property Name="PointsEarned" Type="float" />
-          <Property Name="PointsTotal" Type="float" />
         </EntityType>
         <EntityType Name="Parents">
           <Key>
@@ -464,6 +473,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Assignments_Grades">
+          <End Role="Grades" Type="Self.Grades" Multiplicity="1" />
+          <End Role="Assignments" Type="Self.Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Assignments">
+              <PropertyRef Name="GradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -659,6 +680,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Assignments" EntityType="Self.Assignments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parents" EntityType="Self.Parents" Schema="dbo" store:Type="Tables" />
@@ -726,6 +748,10 @@
           <AssociationSet Name="FK_Admins_Users" Association="Self.FK_Admins_Users">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Admins" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assignments_Grades" Association="Self.FK_Assignments_Grades">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="Assignments" EntitySet="Assignments" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -805,6 +831,7 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Gathering.Models.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Gathering.Models.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Gathering.Models.AspNetUser" />
+          <EntitySet Name="Assignments" EntityType="Gathering.Models.Assignment" />
           <EntitySet Name="Courses" EntityType="Gathering.Models.Cours" />
           <EntitySet Name="Grades" EntityType="Gathering.Models.Grade" />
           <EntitySet Name="Parents" EntityType="Gathering.Models.Parent" />
@@ -884,6 +911,10 @@
           <AssociationSet Name="FK_Teachers_User" Association="Gathering.Models.FK_Teachers_User">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Teacher" EntitySet="Teachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assignments_Grades" Association="Gathering.Models.FK_Assignments_Grades">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Assignment" EntitySet="Assignments" />
           </AssociationSet>
           <AssociationSet Name="FK_Grades_Courses" Association="Gathering.Models.FK_Grades_Courses">
             <End Role="Cours" EntitySet="Courses" />
@@ -1145,6 +1176,18 @@
           <NavigationProperty Name="Teachers" Relationship="Gathering.Models.FK_Teachers_User" FromRole="AspNetUser" ToRole="Teacher" />
           <NavigationProperty Name="AspNetRoles" Relationship="Gathering.Models.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
+        <EntityType Name="Assignment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GradeId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PointsEarned" Type="Int32" />
+          <Property Name="PointsTotal" Type="Int32" Nullable="false" />
+          <Property Name="DueDate" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Grade" Relationship="Gathering.Models.FK_Assignments_Grades" FromRole="Assignment" ToRole="Grade" />
+        </EntityType>
         <EntityType Name="Cours">
           <Key>
             <PropertyRef Name="Id" />
@@ -1162,8 +1205,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentId" Type="Int32" Nullable="false" />
           <Property Name="CourseId" Type="Int32" Nullable="false" />
-          <Property Name="PointsEarned" Type="Double" />
-          <Property Name="PointsTotal" Type="Double" />
+          <NavigationProperty Name="Assignments" Relationship="Gathering.Models.FK_Assignments_Grades" FromRole="Grade" ToRole="Assignment" />
           <NavigationProperty Name="Cours" Relationship="Gathering.Models.FK_Grades_Courses" FromRole="Grade" ToRole="Cours" />
           <NavigationProperty Name="Student" Relationship="Gathering.Models.FK_Grades_Students" FromRole="Grade" ToRole="Student" />
         </EntityType>
@@ -1456,6 +1498,18 @@
             </Principal>
             <Dependent Role="Teacher">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assignments_Grades">
+          <End Type="Gathering.Models.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="Gathering.Models.Assignment" Role="Assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Assignment">
+              <PropertyRef Name="GradeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1756,6 +1810,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Assignments">
+            <EntityTypeMapping TypeName="Gathering.Models.Assignment">
+              <MappingFragment StoreEntitySet="Assignments">
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="PointsTotal" ColumnName="PointsTotal" />
+                <ScalarProperty Name="PointsEarned" ColumnName="PointsEarned" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="GradeId" ColumnName="GradeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Courses">
             <EntityTypeMapping TypeName="Gathering.Models.Cours">
               <MappingFragment StoreEntitySet="Courses">
@@ -1768,8 +1834,6 @@
           <EntitySetMapping Name="Grades">
             <EntityTypeMapping TypeName="Gathering.Models.Grade">
               <MappingFragment StoreEntitySet="Grades">
-                <ScalarProperty Name="PointsTotal" ColumnName="PointsTotal" />
-                <ScalarProperty Name="PointsEarned" ColumnName="PointsEarned" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
