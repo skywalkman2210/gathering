@@ -15,13 +15,13 @@ namespace Gathering.Models
     public partial class Admin
     {
         public int Id { get; set; }
-        public System.Guid UserId { get; set; }
+        public string UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
         public int SchoolId { get; set; }
     
-        public virtual aspnet_Users aspnet_Users { get; set; }
         public virtual School School { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

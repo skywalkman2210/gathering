@@ -25,14 +25,8 @@ namespace Gathering.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Admin> Admins { get; set; }
-        public virtual DbSet<Cours> Courses { get; set; }
-        public virtual DbSet<Parent> Parents { get; set; }
-        public virtual DbSet<School> Schools { get; set; }
-        public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<Teacher> Teachers { get; set; }
-        public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<aspnet_Applications> aspnet_Applications { get; set; }
         public virtual DbSet<aspnet_Membership> aspnet_Membership { get; set; }
         public virtual DbSet<aspnet_Paths> aspnet_Paths { get; set; }
@@ -47,6 +41,12 @@ namespace Gathering.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Cours> Courses { get; set; }
+        public virtual DbSet<Parent> Parents { get; set; }
+        public virtual DbSet<School> Schools { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Teacher> Teachers { get; set; }
+        public virtual DbSet<Grade> Grades { get; set; }
     }
 }

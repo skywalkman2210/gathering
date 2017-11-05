@@ -174,7 +174,7 @@ namespace Gathering.Controllers
 
                 var roleId = Convert.ToInt32(model.AccountRole);
                 
-                if (model.SchoolName == "Other")
+                if (db.Schools.FirstOrDefault(s => s.Name == model.SchoolName) == null)
                 {
                     this.db.Schools.Add(new School()
                     {
@@ -189,7 +189,8 @@ namespace Gathering.Controllers
                 if (result.Succeeded)
                 {
                     AspNetRole role = db.AspNetRoles.First(r => r.Id == model.AccountRole);
-                    Roles.AddUserToRole(user.UserName, role.Name);
+                    var foundUser = db.AspNetUsers.First(u => u.UserName == model.Email);
+                    role.AspNetUsers.Add(foundUser);
 
                     var schoolWithId = this.db.Schools.First(s => s.Name == model.SchoolName);
 
@@ -201,6 +202,7 @@ namespace Gathering.Controllers
                                 FirstName = model.FirstName,
                                 LastName = model.LastName,
                                 SchoolId = schoolWithId.Id,
+                                UserId = foundUser.Id,
                             });
                             break;
                         case 3:
@@ -209,6 +211,7 @@ namespace Gathering.Controllers
                                 FirstName = model.FirstName,
                                 LastName = model.LastName,
                                 SchoolId = schoolWithId.Id,
+                                UserId = foundUser.Id,
                             });
                             break;
                         case 4:
@@ -216,6 +219,7 @@ namespace Gathering.Controllers
                             {
                                 FirstName = model.FirstName,
                                 LastName = model.LastName,
+                                UserId = foundUser.Id,
                             });
                             break;
                         case 5:
@@ -224,6 +228,7 @@ namespace Gathering.Controllers
                                 FirstName = model.FirstName,
                                 LastName = model.LastName,
                                 SchoolId = schoolWithId.Id,
+                                UserId = foundUser.Id,
                             });
                             break;
                     }
