@@ -250,6 +250,7 @@
     <Compile Include="Models\Assignment.cs">
       <DependentUpon>GatherModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AssignmentCreateViewModel.cs" />
     <Compile Include="Models\Cours.cs">
       <DependentUpon>GatherModel.tt</DependentUpon>
     </Compile>
@@ -308,11 +309,17 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Grades.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\favicon_black.ico" />
+    <Content Include="Images\favicon_grey.ico" />
+    <Content Include="Images\favicon_transparent.ico" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\logo_black.png" />
+    <Content Include="Images\logo_grey.png" />
     <Content Include="Models\GatherModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GatherModel.edmx</DependentUpon>
@@ -335,6 +342,8 @@
     <Content Include="Models\GatherModel.edmx.diagram">
       <DependentUpon>GatherModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

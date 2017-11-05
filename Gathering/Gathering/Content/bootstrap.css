@@ -4574,8 +4574,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse .navbar-nav > .dropdown > a .caret {
-  border-top-color: #999999;
-  border-bottom-color: #999999;
+  border-top-color: white;
+  border-bottom-color: white;
 }
 
 .navbar-inverse .navbar-nav > .open > a .caret,

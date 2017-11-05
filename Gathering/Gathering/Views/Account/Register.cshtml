@@ -9,7 +9,23 @@
             margin-top: 20px;
             margin-left: 10px;
         }
-
+        .ui-menu {
+            background: white;
+            color: black;
+            width: 267px;
+            list-style-type: none;
+            padding: 6px 12px;
+        }
+        .ui-menu-item {
+            border-bottom: 1px solid lightgrey;
+        }
+        .ui-menu-item:hover {
+            cursor: pointer;
+            background-color: lightgrey;
+        }
+        .ui-helper-hidden-accessible {
+            display: none;
+        }
     </style>
 </head>
 
@@ -75,6 +91,7 @@
     <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(function () {
+            $(document).tooltip();
             var availableTags = @Html.Raw(Json.Encode(ViewBag.Schools));
             $("#SchoolName").autocomplete({
                 source: availableTags
