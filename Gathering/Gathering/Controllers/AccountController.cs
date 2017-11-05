@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using Gathering.Models;
 using System.Collections.Generic;
 using System.Web.Security;
+using Gathering.Services;
 
 namespace Gathering.Controllers
 {
@@ -20,10 +21,14 @@ namespace Gathering.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private GatheringContext db;
+        private CourseService courseService;
+        private StudentService studentService;
 
         public AccountController()
         {
             this.db = new GatheringContext();
+            this.courseService = new CourseService();
+            this.studentService = new StudentService();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -83,6 +88,20 @@ namespace Gathering.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var user = this.db.AspNetUsers.First(u => u.UserName == model.Email);
+                    var role = user.AspNetRoles.First();
+
+                    switch(role.Id)
+                    {
+                        case "3":
+                            var student = this.studentService.GetAll().First(s => s.AspNetUser.UserName == model.Email);
+                            var courses = studentService.GetStudentCourses(student.Id);
+                            this.HttpContext.Session["Courses"] = courses;
+                            break;
+                        default:
+                            break;
+                    }
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
