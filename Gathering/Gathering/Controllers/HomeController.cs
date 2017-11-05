@@ -22,7 +22,9 @@ namespace Gathering.Controllers
         [Authorize]
         public ActionResult Dashboard()
         {
-            ViewBag.Courses = Session["Courses"] as IEnumerable<Course>;
+            ViewBag.Courses = Session["Courses"] as IEnumerable<Course> == null
+                ? new List<Course>()
+                : Session["Courses"] as IEnumerable<Course>; ;
             return View();
         }
 
