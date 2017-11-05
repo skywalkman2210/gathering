@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gathering.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,11 @@ namespace Gathering.Controllers
 {
     public class GradeController : Controller
     {
-        public ActionResult Index()
+        private CourseService cService = new CourseService();
+
+        public ActionResult Index(int id)
         {
+            ViewBag.Course = cService.Get(id);
             return View();
         }
     }
