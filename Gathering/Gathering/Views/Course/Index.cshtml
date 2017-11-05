@@ -10,17 +10,18 @@
     <title></title>
 </head>
 <body>
-    <div>
-        @if (ViewBag.AllCourses)
+    <table>
+        @if (ViewBag.AllAssignments)
         {
-            foreach (var course in ViewBag.Courses)
+            foreach (var assignment in ViewBag.Assignments)
             {
-                <div class="courseTile">
-
-                </div>
-                <div data-id="@course.Id">@course.Name</div>
+                <tr>
+                    <td>@assignment.Description</td>
+                    <td>@assignment.PointsEarned / @assignment.PointsTotal</td>
+                    <td>@assignment.DueDate</td>
+                </tr>
             }
         }
-    </div>
+    </table>
 </body>
 </html>

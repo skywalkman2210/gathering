@@ -24,6 +24,7 @@ namespace Gathering.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string CourseNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Grade> Grades { get; set; }

@@ -1,14 +1,27 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    Layout = null;
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
 
-<p>@ViewBag.Assignment.Description</p>
-
-<p>@ViewBag.Assignment.DueDate</p>
-
-<p>@ViewBag.Assignment.PointsEarned</p>
-
-<p>@ViewBag.Assignment.PointsTotal</p>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <table>
+        @if (ViewBag.AllAssignments)
+        {
+            foreach (var assignment in ViewBag.Assignments)
+            {
+                <tr>
+                    <td>@assignment.Description</td>
+                    <td>@assignment.PointsEarned / @assignment.PointsTotal</td>
+                    <td>@assignment.DueDate</td>
+                </tr>
+            }
+        }
+    </table>
+</body>
+</html>
