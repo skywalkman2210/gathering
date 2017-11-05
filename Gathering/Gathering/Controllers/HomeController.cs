@@ -13,12 +13,17 @@ namespace Gathering.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Dashboard()
         {
             return View();
         }
 
         public ActionResult Grades()
+        {
+            return View();
+        }
+
+        public ActionResult About()
         {
             return View();
         }
