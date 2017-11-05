@@ -1,4 +1,4 @@
-Gathering/Gathering/obj/
-Gathering/Gathering/bin/
-Gathering/Gathering/App_Data/
-Gathering/.vs/
+Gathering/Gathering/obj/*
+Gathering/Gathering/bin/*
+Gathering/Gathering/App_Data/*
+Gathering/.vs/*

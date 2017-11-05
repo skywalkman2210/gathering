@@ -1,4 +1,5 @@
 ﻿@model Gathering.Models.RegisterViewModel
+@using Gathering.Models
 @{
     ViewBag.Title = "Register";
 }
@@ -32,25 +33,13 @@
     <div class="form-group">
         @Html.LabelFor(m => m.AccountRole, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            <select class="form-control">
-                @* TODO?: Generate options based off of what roles exist *@
-                <option>Student</option>
-                <option>Parent</option>
-                <option>Teacher</option>
-                <option>School Administrator</option>
-            </select>
+            @Html.DropDownList("AccountRole", ViewBag.AccountRoles as IEnumerable<SelectListItem>, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.SchoolName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            <select class="form-control">
-                @* TODO: Generate options based off of schools found in the database *@
-                <option>Student</option>
-                <option>Parent</option>
-                <option>Teacher</option>
-                <option>School Administrator</option>
-            </select>
+            @Html.DropDownList("SchoolName", ViewBag.Schools as IEnumerable<SelectListItem>, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">

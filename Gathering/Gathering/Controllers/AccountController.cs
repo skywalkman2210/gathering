@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Gathering.Models;
+using System.Collections.Generic;
+using System.Web.Security;
 
 namespace Gathering.Controllers
 {
@@ -17,9 +19,11 @@ namespace Gathering.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private GatheringContext db;
 
         public AccountController()
         {
+            this.db = new GatheringContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -139,6 +143,29 @@ namespace Gathering.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            var roles = db.AspNetRoles.AsEnumerable();
+            var schools = db.Schools.AsEnumerable();
+
+            ViewBag.AccountRoles = roles.Where(r => r.Id != "1").Select(r => new SelectListItem()
+            {
+                Text = r.Name,
+                Value = r.Id,
+            });
+
+            var schoolListItems = schools.Select(s => new SelectListItem()
+            {
+                Text = s.Name,
+                Value = s.Id.ToString(),
+            }).ToList();
+
+            schoolListItems.Add(new SelectListItem()
+            {
+                Text = "Other",
+                Value = "0",
+            });
+
+            ViewBag.Schools = schoolListItems.AsEnumerable();
+
             return View();
         }
 
@@ -152,6 +179,12 @@ namespace Gathering.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                
+                switch(model.AccountRole)
+                {
+
+                }
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
