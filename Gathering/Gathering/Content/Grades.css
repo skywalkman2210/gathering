@@ -1,3 +1,8 @@
-﻿body {
-    background-color: darkgrey;
+﻿.tile {
+    background-color: #7F9D71;
+    width: 300px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 20px;
+    margin: 20px 0px;
 }
