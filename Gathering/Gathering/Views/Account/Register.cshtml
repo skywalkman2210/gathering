@@ -4,7 +4,7 @@
     ViewBag.Title = "Register";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2 style="margin-bottom: 0em;">@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -39,7 +39,17 @@
     <div class="form-group">
         @Html.LabelFor(m => m.SchoolName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
+<<<<<<< HEAD
             @Html.DropDownList("SchoolName", ViewBag.Schools as IEnumerable<SelectListItem>, new { @class = "form-control" })
+=======
+            <select class="form-control">
+                @* TODO: Generate options based off of schools found in the database *@
+                <option>PSU Altoona</option>
+                <option>Generic High School</option>
+                <option>South Hills</option>
+                <option>Ohio State</option>
+            </select>
+>>>>>>> 68fff28c28ce955fdb4eca4ce9cc6f4756396abd
         </div>
     </div>
     <div class="form-group">

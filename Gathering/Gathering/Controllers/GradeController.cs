@@ -6,14 +6,9 @@ using System.Web.Mvc;
 
 namespace Gathering.Controllers
 {
-    public class HomeController : Controller
+    public class GradeController : Controller
     {
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult About()
         {
             return View();
         }
