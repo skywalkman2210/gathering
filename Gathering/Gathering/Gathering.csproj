@@ -246,7 +246,7 @@
     <Compile Include="Models\aspnet_WebEvent_Events.cs">
       <DependentUpon>GatherModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Course.cs">
+    <Compile Include="Models\Cours.cs">
       <DependentUpon>GatherModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
@@ -286,6 +286,9 @@
       <DependentUpon>GatherModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Teacher.cs">
+      <DependentUpon>GatherModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TeachersHaveCours.cs">
       <DependentUpon>GatherModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

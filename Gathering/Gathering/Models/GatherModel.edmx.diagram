@@ -7,27 +7,28 @@
       <Diagram DiagramId="5735cf5670f44720abc4c345c8a99026" Name="Diagram1" DisplayType="true">
         <EntityTypeShape EntityType="Gathering.Models.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Gathering.Models.Admin" Width="1.5" PointX="5.25" PointY="5.625" />
-        <EntityTypeShape EntityType="Gathering.Models.aspnet_Applications" Width="1.5" PointX="12.75" PointY="8.125" />
-        <EntityTypeShape EntityType="Gathering.Models.aspnet_Membership" Width="1.5" PointX="15" PointY="6.625" />
-        <EntityTypeShape EntityType="Gathering.Models.aspnet_Paths" Width="1.5" PointX="15" PointY="16.5" />
-        <EntityTypeShape EntityType="Gathering.Models.aspnet_PersonalizationAllUsers" Width="1.5" PointX="17.25" PointY="19.875" />
-        <EntityTypeShape EntityType="Gathering.Models.aspnet_PersonalizationPerUser" Width="1.5" PointX="19.5" PointY="13.25" />
-        <EntityTypeShape EntityType="Gathering.Models.aspnet_Profile" Width="1.5" PointX="19.5" PointY="9.875" />
-        <EntityTypeShape EntityType="Gathering.Models.aspnet_Roles" Width="1.5" PointX="15" PointY="13.375" />
+        <EntityTypeShape EntityType="Gathering.Models.aspnet_Applications" Width="1.5" PointX="13.75" PointY="21.125" />
+        <EntityTypeShape EntityType="Gathering.Models.aspnet_Membership" Width="1.5" PointX="21" PointY="19.625" />
+        <EntityTypeShape EntityType="Gathering.Models.aspnet_Paths" Width="1.5" PointX="16" PointY="19.75" />
+        <EntityTypeShape EntityType="Gathering.Models.aspnet_PersonalizationAllUsers" Width="1.5" PointX="18.25" PointY="23.125" />
+        <EntityTypeShape EntityType="Gathering.Models.aspnet_PersonalizationPerUser" Width="1.5" PointX="18.25" PointY="19.75" />
+        <EntityTypeShape EntityType="Gathering.Models.aspnet_Profile" Width="1.5" PointX="20.5" PointY="26.375" />
+        <EntityTypeShape EntityType="Gathering.Models.aspnet_Roles" Width="1.5" PointX="16" PointY="29.5" />
         <EntityTypeShape EntityType="Gathering.Models.aspnet_SchemaVersions" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Gathering.Models.aspnet_Users" Width="1.5" PointX="17.25" PointY="10.125" />
+        <EntityTypeShape EntityType="Gathering.Models.aspnet_Users" Width="1.5" PointX="18.25" PointY="25.75" />
         <EntityTypeShape EntityType="Gathering.Models.aspnet_WebEvent_Events" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="Gathering.Models.AspNetRole" Width="1.5" PointX="0.75" PointY="10.125" />
-        <EntityTypeShape EntityType="Gathering.Models.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="15.875" />
-        <EntityTypeShape EntityType="Gathering.Models.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="21.875" />
+        <EntityTypeShape EntityType="Gathering.Models.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="25" />
+        <EntityTypeShape EntityType="Gathering.Models.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="22.5" />
         <EntityTypeShape EntityType="Gathering.Models.AspNetUser" Width="1.5" PointX="3" PointY="8.625" />
-        <EntityTypeShape EntityType="Gathering.Models.Course" Width="1.5" PointX="8.25" PointY="5.875" />
+        <EntityTypeShape EntityType="Gathering.Models.Cours" Width="1.5" PointX="11.25" PointY="13.875" />
+        <EntityTypeShape EntityType="Gathering.Models.Grade" Width="1.5" PointX="13.5" PointY="9.75" />
         <EntityTypeShape EntityType="Gathering.Models.Parent" Width="1.5" PointX="10.5" PointY="9.625" />
         <EntityTypeShape EntityType="Gathering.Models.School" Width="1.5" PointX="3" PointY="4.875" />
-        <EntityTypeShape EntityType="Gathering.Models.Student" Width="1.5" PointX="5.25" PointY="9.375" />
+        <EntityTypeShape EntityType="Gathering.Models.Student" Width="1.5" PointX="8.25" PointY="9.375" />
         <EntityTypeShape EntityType="Gathering.Models.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Gathering.Models.Teacher" Width="1.5" PointX="8.25" PointY="9.5" />
-        <EntityTypeShape EntityType="Gathering.Models.Grade" Width="1.5" PointX="10.5" PointY="6.875" />
+        <EntityTypeShape EntityType="Gathering.Models.Teacher" Width="1.5" PointX="5.25" PointY="9.5" />
+        <EntityTypeShape EntityType="Gathering.Models.TeachersHaveCours" Width="1.5" PointX="10.5" PointY="6.875" />
         <AssociationConnector Association="Gathering.Models.FK_Admins_Schools" />
         <AssociationConnector Association="Gathering.Models.FK_Admins_Users" />
         <AssociationConnector Association="Gathering.Models.FK__aspnet_Me__Appli__32AB8735" />
@@ -47,13 +48,14 @@
         <AssociationConnector Association="Gathering.Models.FK_Students_Users" />
         <AssociationConnector Association="Gathering.Models.FK_Teachers_User" />
         <AssociationConnector Association="Gathering.Models.FK_Grades_Courses" />
+        <AssociationConnector Association="Gathering.Models.FK_TeachersHaveCourses_Courses" />
+        <AssociationConnector Association="Gathering.Models.FK_Grades_Students" />
         <AssociationConnector Association="Gathering.Models.FK_Parents_Students" />
         <AssociationConnector Association="Gathering.Models.FK_Students_School" />
         <AssociationConnector Association="Gathering.Models.FK_Teachers_Schools" />
-        <AssociationConnector Association="Gathering.Models.FK_Grades_Students" />
+        <AssociationConnector Association="Gathering.Models.FK_TeachersHaveCourses_Teachers" />
         <AssociationConnector Association="Gathering.Models.aspnet_UsersInRoles" />
         <AssociationConnector Association="Gathering.Models.AspNetUserRoles" />
-        <AssociationConnector Association="Gathering.Models.TeachersHaveCourses" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

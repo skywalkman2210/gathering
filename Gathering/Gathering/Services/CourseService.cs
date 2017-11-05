@@ -9,31 +9,31 @@ namespace Gathering.Services
     public class CourseService : Service
     {
         #region RESTful Methods
-        public List<Course> GetAll()
+        public List<Cours> GetAll()
         {
-            return this.GetAll<Course>();
+            return this.GetAll<Cours>();
         }
 
-        public Course Get(int id)
+        public Cours Get(int id)
         {
-            return this.GetAll<Course>().First(t => t.Id == id);
+            return this.GetAll<Cours>().First(t => t.Id == id);
         }
 
-        public void Create(Course obj)
+        public void Create(Cours obj)
         {
-            this.Create<Course>(obj);
+            this.Create<Cours>(obj);
         }
 
-        public void Update(Course obj)
+        public void Update(Cours obj)
         {
-            var newObj = this.db.Courses1.First(t => t.Id == obj.Id);
+            var newObj = this.db.Courses.First(t => t.Id == obj.Id);
             newObj = obj;
             this.db.SaveChanges();
         }
 
-        public void Delete(Course obj)
+        public void Delete(Cours obj)
         {
-            this.Delete<Course>(obj);
+            this.Delete<Cours>(obj);
         }
         #endregion
 
@@ -45,7 +45,7 @@ namespace Gathering.Services
             {
                 case RoleType.Teacher:
                     var teacher = GetAll<Teacher>().First(s => s.AspNetUser.UserName == UserSession.User.Email);
-                    UserSession.Courses = teacher.Courses.AsEnumerable();
+                    UserSession.Courses = teacher.TeachersHaveCourses.Select(thc => thc.Cours);
                     break;
                 case RoleType.Student:
                     var student = GetAll<Student>().First(s => s.AspNetUser.UserName == UserSession.User.Email);

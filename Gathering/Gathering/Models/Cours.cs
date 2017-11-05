@@ -12,13 +12,13 @@ namespace Gathering.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Course
+    public partial class Cours
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Course()
+        public Cours()
         {
             this.Grades = new HashSet<Grade>();
-            this.Teachers = new HashSet<Teacher>();
+            this.TeachersHaveCourses = new HashSet<TeachersHaveCours>();
         }
     
         public int Id { get; set; }
@@ -28,6 +28,6 @@ namespace Gathering.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Grade> Grades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Teacher> Teachers { get; set; }
+        public virtual ICollection<TeachersHaveCours> TeachersHaveCourses { get; set; }
     }
 }

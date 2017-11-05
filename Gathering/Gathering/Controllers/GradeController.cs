@@ -30,16 +30,17 @@ namespace Gathering.Controllers
         {
             if (ModelState.IsValid)
             {
-                this.cService.Create(new Course()
+                this.cService.Create(new Cours()
                 {
                     Name = model.Name,
                     Description = model.Description,
                 });
 
-                this.cService.SetCoursesSession();
-                Course course = UserSession.Courses.FirstOrDefault(c => c.Name == model.Name && c.Description == model.Description);
+                Cours course = this.cService.GetAll().FirstOrDefault(c => c.Name == model.Name && c.Description == model.Description);
+                var teacher = this.teacherService.GetAll().First(t => t.UserId == UserSession.User.Id);
+                this.teacherService.AddTeacherToCourse(teacher, course);
 
-                this.teacherService.AddCourse(course);
+                this.cService.SetCoursesSession();
 
                 return RedirectToAction(
                     course == null ? "Dashboard" : "Index",

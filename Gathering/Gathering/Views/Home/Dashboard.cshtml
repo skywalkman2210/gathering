@@ -8,7 +8,7 @@
     <link href="@Url.Content("~/Content/Grades.css")" rel="stylesheet" type="text/css" />
 </head>
 <div id="tileContainer">
-    @foreach (Course course in ViewBag.Courses)
+    @foreach (Cours course in ViewBag.Courses)
     {
         <a href="@Url.Action("Index", "Grade", new {Id = course.Id})">
             <div class="tile" id="tile @course.Id">

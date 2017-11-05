@@ -12,15 +12,13 @@ namespace Gathering.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Grade
+    public partial class TeachersHaveCours
     {
         public int Id { get; set; }
-        public int StudentId { get; set; }
+        public int TeacherId { get; set; }
         public int CourseId { get; set; }
-        public Nullable<double> PointsEarned { get; set; }
-        public Nullable<double> PointsTotal { get; set; }
     
         public virtual Cours Cours { get; set; }
-        public virtual Student Student { get; set; }
+        public virtual Teacher Teacher { get; set; }
     }
 }

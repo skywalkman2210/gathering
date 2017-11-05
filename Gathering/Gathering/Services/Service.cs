@@ -27,10 +27,10 @@ namespace Gathering.Services
             this.db.SaveChanges();
         }
 
-        public List<Course> GetStudentCourses(int id)
+        public List<Cours> GetStudentCourses(int id)
         {
             var grades = this.GetAll<Student>().First(s => s.Id == id).Grades;
-            var courses = this.GetAll<Course>();
+            var courses = this.GetAll<Cours>();
 
             var select = grades.Join(courses,
                 g => g.CourseId,

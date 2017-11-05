@@ -38,14 +38,19 @@ namespace Gathering.Services
 #endregion
 
 #region Courses
-        public List<Course> GetTeacherCourses(int id)
+        public List<Cours> GetTeacherCourses(int id)
         {
-            return this.Get(id).Courses.ToList();
+            return this.Get(id).TeachersHaveCourses.Select(t => t.Cours).ToList();
         }
 
-        public void AddCourse(Course obj)
+        public void AddTeacherToCourse(Teacher teach, Cours obj)
         {
-            this.Create(obj);
+            teach.TeachersHaveCourses.Add(new TeachersHaveCours()
+            {
+                CourseId = obj.Id,
+                TeacherId = teach.Id,
+            });
+            db.SaveChanges();
         }
 #endregion
     }

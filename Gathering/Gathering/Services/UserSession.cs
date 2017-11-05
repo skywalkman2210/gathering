@@ -22,13 +22,13 @@ namespace Gathering.Services
             }
         }
 
-        public static IEnumerable<Course> Courses
+        public static IEnumerable<Cours> Courses
         {
             get
             {
                 return HttpContext.Current.Session["Courses"] == null
-                    ? new List<Course>().AsEnumerable()
-                    : HttpContext.Current.Session["Courses"] as IEnumerable<Course>;
+                    ? new List<Cours>().AsEnumerable()
+                    : HttpContext.Current.Session["Courses"] as IEnumerable<Cours>;
             }
             set
             {

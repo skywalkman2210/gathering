@@ -33,7 +33,7 @@
                                 <span class="caret" />
                             </a>
                             <ul class="dropdown-menu">
-                                @foreach (Course course in UserSession.Courses)
+                                @foreach (Cours course in UserSession.Courses)
                                 {
                                     <li>@Html.ActionLink(course.Name, "Index", "Grade", new { id = course.Id }, null)</li>
                                 }

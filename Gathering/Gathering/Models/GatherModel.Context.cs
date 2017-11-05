@@ -41,12 +41,13 @@ namespace Gathering.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<Course> Courses1 { get; set; }
+        public virtual DbSet<Cours> Courses { get; set; }
+        public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<Parent> Parents { get; set; }
         public virtual DbSet<School> Schools { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
-        public virtual DbSet<Grade> Grades { get; set; }
+        public virtual DbSet<TeachersHaveCours> TeachersHaveCourses { get; set; }
     }
 }
