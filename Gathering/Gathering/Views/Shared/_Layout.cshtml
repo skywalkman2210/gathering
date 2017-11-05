@@ -12,6 +12,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
+                <img src="~/Images/logo.png" style="width: 36px; height: 36px; margin-top: 6px;" />
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -22,7 +23,19 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Dashboard", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Grades", "Grades", "Home")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="Home/Grades">
+                            Grades
+                            <span class="caret" />
+                        </a>
+                        <ul class="dropdown-menu">
+                            @*TODO: Add the classes/periods dynamically from the DB*@
+                            <li>@Html.ActionLink("Class #1", "Grades", "Home")</li>
+                            <li>@Html.ActionLink("Class #2", "Grades", "Home")</li>
+                            <li>@Html.ActionLink("Class #3", "Grades", "Home")</li>
+                        </ul>
+                    </li>
+                    <li></li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")

@@ -11,6 +11,7 @@
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
+                <img src="~/Images/logo.png" style="width: 64px; height: 64px; margin-left: 38px;" />
                 <h4>Please log in or create a new account</h4>
                 <hr />
                 <div class="form-group">
