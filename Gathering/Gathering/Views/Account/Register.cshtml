@@ -3,7 +3,7 @@
     ViewBag.Title = "Register";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2 style="margin-bottom: 0em;">@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -46,10 +46,10 @@
         <div class="col-md-10">
             <select class="form-control">
                 @* TODO: Generate options based off of schools found in the database *@
-                <option>Student</option>
-                <option>Parent</option>
-                <option>Teacher</option>
-                <option>School Administrator</option>
+                <option>PSU Altoona</option>
+                <option>Generic High School</option>
+                <option>South Hills</option>
+                <option>Ohio State</option>
             </select>
         </div>
     </div>
