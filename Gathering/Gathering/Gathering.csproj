@@ -200,6 +200,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddGradeViewModel.cs" />
     <Compile Include="Models\Admin.cs">
       <DependentUpon>GatherModel.tt</DependentUpon>
     </Compile>
@@ -274,6 +275,7 @@
     <Compile Include="Models\Parent.cs">
       <DependentUpon>GatherModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RoleType.cs" />
     <Compile Include="Models\School.cs">
       <DependentUpon>GatherModel.tt</DependentUpon>
     </Compile>
@@ -292,12 +294,12 @@
     <Compile Include="Services\StudentService.cs" />
     <Compile Include="Services\TeacherService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\UserSession.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Grades.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -372,6 +374,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Grade\Index.cshtml" />
     <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\Grade\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

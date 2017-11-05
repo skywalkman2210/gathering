@@ -21,7 +21,7 @@ namespace Gathering.Services
 
         public void Create(Course obj)
         {
-            this.Create(obj);
+            this.Create<Course>(obj);
         }
 
         public void Update(Course obj)
@@ -33,7 +33,7 @@ namespace Gathering.Services
 
         public void Delete(Course obj)
         {
-            this.Delete(obj);
+            this.Delete<Course>(obj);
         }
         #endregion
 

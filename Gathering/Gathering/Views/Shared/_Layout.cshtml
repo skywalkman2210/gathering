@@ -37,6 +37,11 @@
                                 {
                                     <li>@Html.ActionLink(course.Name, "Index", "Grade", new { id = course.Id }, null)</li>
                                 }
+                                
+                                @if (UserSession.RoleType == RoleType.Teacher)
+                                {
+                                    <li>@Html.ActionLink("Add New Course", "Add", "Grade")</li>
+                                }
                             </ul>
                         </li>
                     }
