@@ -190,7 +190,8 @@ namespace Gathering.Controllers
                 {
                     AspNetRole role = db.AspNetRoles.First(r => r.Id == model.AccountRole);
                     var foundUser = db.AspNetUsers.First(u => u.UserName == model.Email);
-                    
+                    role.AspNetUsers.Add(foundUser);
+
                     var schoolWithId = this.db.Schools.First(s => s.Name == model.SchoolName);
 
                     switch(roleId)
@@ -209,7 +210,7 @@ namespace Gathering.Controllers
                             {
                                 FirstName = model.FirstName,
                                 LastName = model.LastName,
-                                School = schoolWithId,
+                                SchoolId = schoolWithId.Id,
                                 UserId = foundUser.Id,
                             });
                             break;

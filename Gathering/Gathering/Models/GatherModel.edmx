@@ -19,7 +19,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
@@ -231,25 +231,25 @@ warning 6002: The table/view 'Gathering.dbo.Grades' does not have a primary key 
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="1" />
-          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" />
         </EntityType>
         <EntityType Name="Schools">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Students">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
@@ -548,7 +548,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Parents_Students">
-          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
           <End Role="Parents" Type="Self.Parents" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Students">
@@ -584,11 +584,11 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Students_Users">
-          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Students" Type="Self.Students" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="aspnet_Users">
-              <PropertyRef Name="UserId" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Students">
               <PropertyRef Name="UserId" />
@@ -608,11 +608,11 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Teachers_User">
-          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Teachers" Type="Self.Teachers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="aspnet_Users">
-              <PropertyRef Name="UserId" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Teachers">
               <PropertyRef Name="UserId" />
@@ -778,7 +778,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
           <AssociationSet Name="FK_Students_Users" Association="Self.FK_Students_Users">
-            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
           <AssociationSet Name="FK_Teachers_Schools" Association="Self.FK_Teachers_Schools">
@@ -786,7 +786,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             <End Role="Teachers" EntitySet="Teachers" />
           </AssociationSet>
           <AssociationSet Name="FK_Teachers_User" Association="Self.FK_Teachers_User">
-            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Teachers" EntitySet="Teachers" />
           </AssociationSet>
           <AssociationSet Name="FK_TeachersHaveCourses_Courses" Association="Self.FK_TeachersHaveCourses_Courses">
@@ -878,14 +878,6 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
           </AssociationSet>
-          <AssociationSet Name="FK_Students_Users" Association="Gathering.Models.FK_Students_Users">
-            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
-            <End Role="Student" EntitySet="Students" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Teachers_User" Association="Gathering.Models.FK_Teachers_User">
-            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
-            <End Role="Teacher" EntitySet="Teachers" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Gathering.Models.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
@@ -897,6 +889,14 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <AssociationSet Name="FK_Parents_Users" Association="Gathering.Models.FK_Parents_Users">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Parent" EntitySet="Parents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Users" Association="Gathering.Models.FK_Students_Users">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_User" Association="Gathering.Models.FK_Teachers_User">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Teacher" EntitySet="Teachers" />
           </AssociationSet>
           <AssociationSet Name="FK_Grades_Courses" Association="Gathering.Models.FK_Grades_Courses">
             <End Role="Cours" EntitySet="Courses" />
@@ -945,7 +945,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -1079,8 +1079,6 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <NavigationProperty Name="aspnet_Membership1" Relationship="Gathering.Models.FK__aspnet_Me__UserI__45F365D3" FromRole="aspnet_Users" ToRole="aspnet_Membership" />
           <NavigationProperty Name="aspnet_PersonalizationPerUser" Relationship="Gathering.Models.FK__aspnet_Pe__UserI__01142BA1" FromRole="aspnet_Users" ToRole="aspnet_PersonalizationPerUser" />
           <NavigationProperty Name="aspnet_Profile" Relationship="Gathering.Models.FK__aspnet_Pr__UserI__59FA5E80" FromRole="aspnet_Users" ToRole="aspnet_Profile" />
-          <NavigationProperty Name="Students" Relationship="Gathering.Models.FK_Students_Users" FromRole="aspnet_Users" ToRole="Student" />
-          <NavigationProperty Name="Teachers" Relationship="Gathering.Models.FK_Teachers_User" FromRole="aspnet_Users" ToRole="Teacher" />
           <NavigationProperty Name="aspnet_Roles" Relationship="Gathering.Models.aspnet_UsersInRoles" FromRole="aspnet_Users" ToRole="aspnet_Roles" />
         </EntityType>
         <EntityType Name="aspnet_WebEvent_Events">
@@ -1152,6 +1150,8 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <NavigationProperty Name="AspNetUserClaims" Relationship="Gathering.Models.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Gathering.Models.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="Parents" Relationship="Gathering.Models.FK_Parents_Users" FromRole="AspNetUser" ToRole="Parent" />
+          <NavigationProperty Name="Students" Relationship="Gathering.Models.FK_Students_Users" FromRole="AspNetUser" ToRole="Student" />
+          <NavigationProperty Name="Teachers" Relationship="Gathering.Models.FK_Teachers_User" FromRole="AspNetUser" ToRole="Teacher" />
           <NavigationProperty Name="AspNetRoles" Relationship="Gathering.Models.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
         <EntityType Name="Cours">
@@ -1168,12 +1168,12 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" />
           <NavigationProperty Name="AspNetUser" Relationship="Gathering.Models.FK_Parents_Users" FromRole="Parent" ToRole="AspNetUser" />
           <NavigationProperty Name="Student" Relationship="Gathering.Models.FK_Parents_Students" FromRole="Parent" ToRole="Student" />
         </EntityType>
@@ -1181,7 +1181,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Admins" Relationship="Gathering.Models.FK_Admins_Schools" FromRole="School" ToRole="Admin" />
           <NavigationProperty Name="Students" Relationship="Gathering.Models.FK_Students_School" FromRole="School" ToRole="Student" />
@@ -1191,13 +1191,13 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="SchoolId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="aspnet_Users" Relationship="Gathering.Models.FK_Students_Users" FromRole="Student" ToRole="aspnet_Users" />
+          <NavigationProperty Name="AspNetUser" Relationship="Gathering.Models.FK_Students_Users" FromRole="Student" ToRole="AspNetUser" />
           <NavigationProperty Name="Parents" Relationship="Gathering.Models.FK_Parents_Students" FromRole="Student" ToRole="Parent" />
           <NavigationProperty Name="School" Relationship="Gathering.Models.FK_Students_School" FromRole="Student" ToRole="School" />
           <NavigationProperty Name="Grades" Relationship="Gathering.Models.FK_Grades_Students" FromRole="Student" ToRole="Grade" />
@@ -1222,7 +1222,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="SchoolId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="aspnet_Users" Relationship="Gathering.Models.FK_Teachers_User" FromRole="Teacher" ToRole="aspnet_Users" />
+          <NavigationProperty Name="AspNetUser" Relationship="Gathering.Models.FK_Teachers_User" FromRole="Teacher" ToRole="AspNetUser" />
           <NavigationProperty Name="School" Relationship="Gathering.Models.FK_Teachers_Schools" FromRole="Teacher" ToRole="School" />
           <NavigationProperty Name="Courses" Relationship="Gathering.Models.TeachersHaveCourses" FromRole="Teacher" ToRole="Cours" />
         </EntityType>
@@ -1393,30 +1393,6 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Students_Users">
-          <End Type="Gathering.Models.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
-          <End Type="Gathering.Models.Student" Role="Student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aspnet_Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Teachers_User">
-          <End Type="Gathering.Models.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
-          <End Type="Gathering.Models.Teacher" Role="Teacher" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aspnet_Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Teacher">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="Gathering.Models.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1457,6 +1433,30 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Students_Users">
+          <End Type="Gathering.Models.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="Gathering.Models.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_User">
+          <End Type="Gathering.Models.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="Gathering.Models.Teacher" Role="Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Grades_Courses">
           <End Type="Gathering.Models.Cours" Role="Cours" Multiplicity="1" />
           <End Type="Gathering.Models.Grade" Role="Grade" Multiplicity="*" />
@@ -1470,7 +1470,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Parents_Students">
-          <End Type="Gathering.Models.Student" Role="Student" Multiplicity="1" />
+          <End Type="Gathering.Models.Student" Role="Student" Multiplicity="0..1" />
           <End Type="Gathering.Models.Parent" Role="Parent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">

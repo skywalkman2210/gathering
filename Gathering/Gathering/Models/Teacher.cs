@@ -27,7 +27,7 @@ namespace Gathering.Models
         public string Gender { get; set; }
         public int SchoolId { get; set; }
     
-        public virtual aspnet_Users aspnet_Users { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual School School { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cours> Courses { get; set; }
