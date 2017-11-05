@@ -10,9 +10,11 @@
 <div id="tileContainer">
     @foreach (Course course in ViewBag.Courses)
     {
-        <div class="tile" data-id="@course.Id">
-            <p>@course.Name</p>
-            <p> Period Number / Section Number </p>
-        </div>
+        <a href="@Url.Action("Index", "Grade", new {Id = course.Id})">
+            <div class="tile" id="tile @course.Id">
+                <p>@course.Name</p>
+                <p> Period Number / Section Number </p>
+            </div>
+        </a>
     }
 </div>
