@@ -17,5 +17,10 @@ namespace Gathering.Controllers
         {
             return View();
         }
+
+        public ActionResult Grades()
+        {
+            return View();
+        }
     }
 }
