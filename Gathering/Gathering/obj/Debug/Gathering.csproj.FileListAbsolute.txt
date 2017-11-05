@@ -187,7 +187,6 @@ C:\Users\skywa\Desktop\Git\gathering\Gathering\Gathering\bin\Microsoft.AI.Depend
 C:\Users\skywa\Desktop\Git\gathering\Gathering\Gathering\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\skywa\Desktop\Git\gathering\Gathering\Gathering\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\skywa\Desktop\Git\gathering\Gathering\Gathering\bin\Microsoft.AI.Web.xml
-C:\Users\skywa\Desktop\Git\gathering\Gathering\Gathering\obj\Debug\Gathering.csprojResolveAssemblyReference.cache
 C:\Users\skywa\Desktop\Git\gathering\Gathering\Gathering\obj\Debug\Gathering.csproj.CoreCompileInputs.cache
 C:\Users\skywa\Desktop\Git\gathering\Gathering\Gathering\obj\Debug\Gathering.dll
 C:\Users\skywa\Desktop\Git\gathering\Gathering\Gathering\obj\Debug\Gathering.pdb

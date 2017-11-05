@@ -52,6 +52,7 @@
         <AssociationConnector Association="Gathering.Models.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="Gathering.Models.aspnet_UsersInRoles" />
         <AssociationConnector Association="Gathering.Models.AspNetUserRoles" />
+        <AssociationConnector Association="Gathering.Models.FK_Admins_Schools" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

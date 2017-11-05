@@ -179,15 +179,64 @@ namespace Gathering.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                
-                switch(model.AccountRole)
-                {
 
+                var roleId = Convert.ToInt32(model.AccountRole);
+                var schoolId = Convert.ToInt32(model.SchoolName);
+                
+                if (schoolId == 0)
+                {
+                    this.db.Schools.Add(new School()
+                    {
+                        Name = model.SchoolName,
+                    });
+
+                    this.db.SaveChanges();
                 }
 
-                var result = await UserManager.CreateAsync(user, model.Password);
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
+                    AspNetRole role = db.AspNetRoles.First(r => r.Id == model.AccountRole);
+                    Roles.AddUserToRole(user.UserName, role.Name);
+
+                    var schoolWithId = this.db.Schools.First(s => s.Name == model.SchoolName);
+
+                    switch(roleId)
+                    {
+                        case 2:
+                            db.Teachers.Add(new Teacher()
+                            {
+                                FirstName = model.FirstName,
+                                LastName = model.LastName,
+                                SchoolId = schoolWithId.Id,
+                            });
+                            break;
+                        case 3:
+                            db.Students.Add(new Student()
+                            {
+                                FirstName = model.FirstName,
+                                LastName = model.LastName,
+                                SchoolId = schoolWithId.Id,
+                            });
+                            break;
+                        case 4:
+                            db.Parents.Add(new Parent()
+                            {
+                                FirstName = model.FirstName,
+                                LastName = model.LastName,
+                            });
+                            break;
+                        case 5:
+                            db.Admins.Add(new Admin()
+                            {
+                                FirstName = model.FirstName,
+                                LastName = model.LastName,
+                                SchoolId = schoolWithId.Id,
+                            });
+                            break;
+                    }
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -195,6 +244,8 @@ namespace Gathering.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+
 
                     return RedirectToAction("Index", "Home");
                 }

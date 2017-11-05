@@ -19,6 +19,7 @@ namespace Gathering.Models
         {
             this.Students = new HashSet<Student>();
             this.Teachers = new HashSet<Teacher>();
+            this.Admins = new HashSet<Admin>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,7 @@ namespace Gathering.Models
         public virtual ICollection<Student> Students { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Teacher> Teachers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Admin> Admins { get; set; }
     }
 }

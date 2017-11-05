@@ -24,6 +24,7 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="1" />
+          <Property Name="SchoolId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="aspnet_Applications">
           <Key>
@@ -442,6 +443,18 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Admins_Schools">
+          <End Role="Schools" Type="Self.Schools" Multiplicity="1" />
+          <End Role="Admins" Type="Self.Admins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schools">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Admins">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Admins_Users">
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
           <End Role="Admins" Type="Self.Admins" Multiplicity="*" />
@@ -708,6 +721,10 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Admins_Schools" Association="Self.FK_Admins_Schools">
+            <End Role="Schools" EntitySet="Schools" />
+            <End Role="Admins" EntitySet="Admins" />
+          </AssociationSet>
           <AssociationSet Name="FK_Admins_Users" Association="Self.FK_Admins_Users">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="Admins" EntitySet="Admins" />
@@ -779,6 +796,8 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="aspnet_Users" Relationship="Gathering.Models.FK_Admins_Users" FromRole="Admin" ToRole="aspnet_Users" />
+          <Property Name="SchoolId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="School" Relationship="Gathering.Models.FK_Admins_Schools" FromRole="Admin" ToRole="School" />
         </EntityType>
         <EntityType Name="Cours">
           <Key>
@@ -810,6 +829,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Students_School" FromRole="Schools" ToRole="Students" />
           <NavigationProperty Name="Teachers" Relationship="Self.FK_Teachers_Schools" FromRole="Schools" ToRole="Teachers" />
+          <NavigationProperty Name="Admins" Relationship="Gathering.Models.FK_Admins_Schools" FromRole="School" ToRole="Admin" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -1034,6 +1054,10 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <AssociationSet Name="AspNetUserRoles" Association="Gathering.Models.AspNetUserRoles">
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Admins_Schools" Association="Gathering.Models.FK_Admins_Schools">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="Admin" EntitySet="Admins" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -1459,6 +1483,18 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <End Type="Gathering.Models.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="Gathering.Models.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
+        <Association Name="FK_Admins_Schools">
+          <End Type="Gathering.Models.School" Role="School" Multiplicity="1" />
+          <End Type="Gathering.Models.Admin" Role="Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1468,6 +1504,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="Gathering.Models.Admin">
               <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />

@@ -19,7 +19,9 @@ namespace Gathering.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
+        public int SchoolId { get; set; }
     
         public virtual aspnet_Users aspnet_Users { get; set; }
+        public virtual School School { get; set; }
     }
 }
