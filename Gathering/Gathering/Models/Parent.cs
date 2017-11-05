@@ -15,12 +15,13 @@ namespace Gathering.Models
     public partial class Parent
     {
         public int Id { get; set; }
-        public System.Guid UserId { get; set; }
+        public string UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
         public int StudentId { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Student Student { get; set; }
     }
 }

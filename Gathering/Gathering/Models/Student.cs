@@ -22,17 +22,17 @@ namespace Gathering.Models
         }
     
         public int Id { get; set; }
-        public System.Guid UserId { get; set; }
+        public string UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
         public int SchoolId { get; set; }
     
+        public virtual aspnet_Users aspnet_Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Parent> Parents { get; set; }
         public virtual School School { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Grade> Grades { get; set; }
-        public virtual aspnet_Users aspnet_Users { get; set; }
     }
 }

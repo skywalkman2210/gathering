@@ -8,9 +8,5 @@ namespace Gathering.Services
 {
     public static class UserService
     {
-        public static void AddUserToRole(GatheringContext context, AspNetUser user, AspNetRole role)
-        {
-
-        }
     }
 }

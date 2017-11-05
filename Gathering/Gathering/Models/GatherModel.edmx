@@ -20,7 +20,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="1" />
@@ -40,7 +40,7 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="PasswordFormat" Type="int" Nullable="false" />
           <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
@@ -84,7 +84,7 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PathId" Type="uniqueidentifier" />
-          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="PageSettings" Type="image" Nullable="false" />
           <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
         </EntityType>
@@ -92,7 +92,7 @@
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="PropertyNames" Type="ntext" Nullable="false" />
           <Property Name="PropertyValuesString" Type="ntext" Nullable="false" />
           <Property Name="PropertyValuesBinary" Type="image" Nullable="false" />
@@ -122,7 +122,7 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="LoweredUserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="MobileAlias" Type="nvarchar" MaxLength="16" />
@@ -134,7 +134,7 @@
             <PropertyRef Name="UserId" />
             <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="aspnet_WebEvent_Events">
@@ -232,7 +232,7 @@ warning 6002: The table/view 'Gathering.dbo.Grades' does not have a primary key 
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="1" />
@@ -250,7 +250,7 @@ warning 6002: The table/view 'Gathering.dbo.Grades' does not have a primary key 
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="1" />
@@ -271,7 +271,7 @@ warning 6002: The table/view 'Gathering.dbo.Grades' does not have a primary key 
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="1" />
@@ -456,11 +456,11 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Admins_Users">
-          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Admins" Type="Self.Admins" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="aspnet_Users">
-              <PropertyRef Name="UserId" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Admins">
               <PropertyRef Name="UserId" />
@@ -556,6 +556,18 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             </Principal>
             <Dependent Role="Parents">
               <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parents_Users">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Parents" Type="Self.Parents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parents">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -726,7 +738,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             <End Role="Admins" EntitySet="Admins" />
           </AssociationSet>
           <AssociationSet Name="FK_Admins_Users" Association="Self.FK_Admins_Users">
-            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Admins" EntitySet="Admins" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -755,6 +767,10 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           </AssociationSet>
           <AssociationSet Name="FK_Parents_Students" Association="Self.FK_Parents_Students">
             <End Role="Students" EntitySet="Students" />
+            <End Role="Parents" EntitySet="Parents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parents_Users" Association="Self.FK_Parents_Users">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Parents" EntitySet="Parents" />
           </AssociationSet>
           <AssociationSet Name="FK_Students_School" Association="Self.FK_Students_School">
@@ -786,188 +802,9 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Gathering.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Admin">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="aspnet_Users" Relationship="Gathering.Models.FK_Admins_Users" FromRole="Admin" ToRole="aspnet_Users" />
-          <Property Name="SchoolId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="School" Relationship="Gathering.Models.FK_Admins_Schools" FromRole="Admin" ToRole="School" />
-        </EntityType>
-        <EntityType Name="Cours">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Grades" Relationship="Self.FK_Grades_Courses" FromRole="Courses" ToRole="Grades" />
-          <NavigationProperty Name="Teachers" Relationship="Self.TeachersHaveCourses" FromRole="Courses" ToRole="Teachers" />
-        </EntityType>
-        <EntityType Name="Parent">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="StudentId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_Parents_Students" FromRole="Parents" ToRole="Students" />
-        </EntityType>
-        <EntityType Name="School">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Students" Relationship="Self.FK_Students_School" FromRole="Schools" ToRole="Students" />
-          <NavigationProperty Name="Teachers" Relationship="Self.FK_Teachers_Schools" FromRole="Schools" ToRole="Teachers" />
-          <NavigationProperty Name="Admins" Relationship="Gathering.Models.FK_Admins_Schools" FromRole="School" ToRole="Admin" />
-        </EntityType>
-        <EntityType Name="Student">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="SchoolId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Parents" Relationship="Self.FK_Parents_Students" FromRole="Students" ToRole="Parents" />
-          <NavigationProperty Name="School" Relationship="Self.FK_Students_School" FromRole="Students" ToRole="Schools" />
-          <NavigationProperty Name="Grades" Relationship="Self.FK_Grades_Students" FromRole="Students" ToRole="Grades" />
-          <NavigationProperty Name="aspnet_Users" Relationship="Gathering.Models.FK_Students_Users" FromRole="Student" ToRole="aspnet_Users" />
-        </EntityType>
-        <EntityType Name="Teacher">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="SchoolId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="School" Relationship="Self.FK_Teachers_Schools" FromRole="Teachers" ToRole="Schools" />
-          <NavigationProperty Name="Courses" Relationship="Self.TeachersHaveCourses" FromRole="Teachers" ToRole="Courses" />
-          <NavigationProperty Name="aspnet_Users" Relationship="Gathering.Models.FK_Teachers_User" FromRole="Teacher" ToRole="aspnet_Users" />
-        </EntityType>
-        <EntityType Name="Grade">
-          <Key>
-            <PropertyRef Name="StudentId" />
-            <PropertyRef Name="CourseId" />
-          </Key>
-          <Property Name="StudentId" Type="Int32" Nullable="false" />
-          <Property Name="CourseId" Type="Int32" Nullable="false" />
-          <Property Name="Grade1" Type="Double" />
-          <NavigationProperty Name="Cours" Relationship="Self.FK_Grades_Courses" FromRole="Grades" ToRole="Courses" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_Grades_Students" FromRole="Grades" ToRole="Students" />
-        </EntityType>
-        <Association Name="FK_Grades_Courses">
-          <End Role="Courses" Type="Self.Cours" Multiplicity="1" />
-          <End Role="Grades" Type="Self.Grade" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Courses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Grades">
-              <PropertyRef Name="CourseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Parents_Students">
-          <End Role="Students" Type="Self.Student" Multiplicity="1" />
-          <End Role="Parents" Type="Self.Parent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Students">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Parents">
-              <PropertyRef Name="StudentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Students_School">
-          <End Role="Schools" Type="Self.School" Multiplicity="1" />
-          <End Role="Students" Type="Self.Student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Schools">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Students">
-              <PropertyRef Name="SchoolId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Teachers_Schools">
-          <End Role="Schools" Type="Self.School" Multiplicity="1" />
-          <End Role="Teachers" Type="Self.Teacher" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Schools">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Teachers">
-              <PropertyRef Name="SchoolId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Grades_Students">
-          <End Role="Students" Type="Self.Student" Multiplicity="1" />
-          <End Role="Grades" Type="Self.Grade" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Students">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Grades">
-              <PropertyRef Name="StudentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TeachersHaveCourses">
-          <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
-          <End Role="Teachers" Type="Self.Teacher" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="GatheringContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Admins" EntityType="Self.Admin" />
-          <EntitySet Name="Courses" EntityType="Self.Cours" />
-          <EntitySet Name="Parents" EntityType="Self.Parent" />
-          <EntitySet Name="Schools" EntityType="Self.School" />
-          <EntitySet Name="Students" EntityType="Self.Student" />
-          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
-          <EntitySet Name="Grades" EntityType="Self.Grade" />
-          <AssociationSet Name="FK_Grades_Courses" Association="Self.FK_Grades_Courses">
-            <End Role="Courses" EntitySet="Courses" />
-            <End Role="Grades" EntitySet="Grades" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Parents_Students" Association="Self.FK_Parents_Students">
-            <End Role="Students" EntitySet="Students" />
-            <End Role="Parents" EntitySet="Parents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Students_School" Association="Self.FK_Students_School">
-            <End Role="Schools" EntitySet="Schools" />
-            <End Role="Students" EntitySet="Students" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Teachers_Schools" Association="Self.FK_Teachers_Schools">
-            <End Role="Schools" EntitySet="Schools" />
-            <End Role="Teachers" EntitySet="Teachers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Grades_Students" Association="Self.FK_Grades_Students">
-            <End Role="Students" EntitySet="Students" />
-            <End Role="Grades" EntitySet="Grades" />
-          </AssociationSet>
-          <AssociationSet Name="TeachersHaveCourses" Association="Self.TeachersHaveCourses">
-            <End Role="Courses" EntitySet="Courses" />
-            <End Role="Teachers" EntitySet="Teachers" />
-          </AssociationSet>
           <EntitySet Name="C__MigrationHistory" EntityType="Gathering.Models.C__MigrationHistory" />
+          <EntitySet Name="Admins" EntityType="Gathering.Models.Admin" />
           <EntitySet Name="aspnet_Applications" EntityType="Gathering.Models.aspnet_Applications" />
           <EntitySet Name="aspnet_Membership" EntityType="Gathering.Models.aspnet_Membership" />
           <EntitySet Name="aspnet_Paths" EntityType="Gathering.Models.aspnet_Paths" />
@@ -982,9 +819,19 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <EntitySet Name="AspNetUserClaims" EntityType="Gathering.Models.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Gathering.Models.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Gathering.Models.AspNetUser" />
+          <EntitySet Name="Courses" EntityType="Gathering.Models.Cours" />
+          <EntitySet Name="Parents" EntityType="Gathering.Models.Parent" />
+          <EntitySet Name="Schools" EntityType="Gathering.Models.School" />
+          <EntitySet Name="Students" EntityType="Gathering.Models.Student" />
           <EntitySet Name="sysdiagrams" EntityType="Gathering.Models.sysdiagram" />
+          <EntitySet Name="Teachers" EntityType="Gathering.Models.Teacher" />
+          <EntitySet Name="Grades" EntityType="Gathering.Models.Grade" />
+          <AssociationSet Name="FK_Admins_Schools" Association="Gathering.Models.FK_Admins_Schools">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
           <AssociationSet Name="FK_Admins_Users" Association="Gathering.Models.FK_Admins_Users">
-            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Admin" EntitySet="Admins" />
           </AssociationSet>
           <AssociationSet Name="FK__aspnet_Me__Appli__32AB8735" Association="Gathering.Models.FK__aspnet_Me__Appli__32AB8735">
@@ -1047,6 +894,30 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="FK_Parents_Users" Association="Gathering.Models.FK_Parents_Users">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Parent" EntitySet="Parents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grades_Courses" Association="Gathering.Models.FK_Grades_Courses">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="Grade" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parents_Students" Association="Gathering.Models.FK_Parents_Students">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Parent" EntitySet="Parents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_School" Association="Gathering.Models.FK_Students_School">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_Schools" Association="Gathering.Models.FK_Teachers_Schools">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="Teacher" EntitySet="Teachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grades_Students" Association="Gathering.Models.FK_Grades_Students">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Grade" EntitySet="Grades" />
+          </AssociationSet>
           <AssociationSet Name="aspnet_UsersInRoles" Association="Gathering.Models.aspnet_UsersInRoles">
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
@@ -1055,9 +926,9 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Admins_Schools" Association="Gathering.Models.FK_Admins_Schools">
-            <End Role="School" EntitySet="Schools" />
-            <End Role="Admin" EntitySet="Admins" />
+          <AssociationSet Name="TeachersHaveCourses" Association="Gathering.Models.TeachersHaveCourses">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="Teacher" EntitySet="Teachers" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -1069,6 +940,19 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="School" Relationship="Gathering.Models.FK_Admins_Schools" FromRole="Admin" ToRole="School" />
+          <NavigationProperty Name="AspNetUser" Relationship="Gathering.Models.FK_Admins_Users" FromRole="Admin" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="aspnet_Applications">
           <Key>
@@ -1089,7 +973,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="ApplicationId" Type="Guid" Nullable="false" />
-          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="PasswordFormat" Type="Int32" Nullable="false" />
           <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
@@ -1141,7 +1025,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="PathId" Type="Guid" />
-          <Property Name="UserId" Type="Guid" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="PageSettings" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="aspnet_Paths" Relationship="Gathering.Models.FK__aspnet_Pe__PathI__00200768" FromRole="aspnet_PersonalizationPerUser" ToRole="aspnet_Paths" />
@@ -1151,7 +1035,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="PropertyNames" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PropertyValuesString" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PropertyValuesBinary" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
@@ -1184,13 +1068,12 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="ApplicationId" Type="Guid" Nullable="false" />
-          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="LoweredUserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="MobileAlias" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
           <Property Name="LastActivityDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Admins" Relationship="Gathering.Models.FK_Admins_Users" FromRole="aspnet_Users" ToRole="Admin" />
           <NavigationProperty Name="aspnet_Applications" Relationship="Gathering.Models.FK__aspnet_Us__Appli__34C8D9D1" FromRole="aspnet_Users" ToRole="aspnet_Applications" />
           <NavigationProperty Name="aspnet_Membership" Relationship="Gathering.Models.FK__aspnet_Me__UserI__339FAB6E" FromRole="aspnet_Users" ToRole="aspnet_Membership" />
           <NavigationProperty Name="aspnet_Membership1" Relationship="Gathering.Models.FK__aspnet_Me__UserI__45F365D3" FromRole="aspnet_Users" ToRole="aspnet_Membership" />
@@ -1265,9 +1148,59 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Admins" Relationship="Gathering.Models.FK_Admins_Users" FromRole="AspNetUser" ToRole="Admin" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Gathering.Models.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Gathering.Models.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="Parents" Relationship="Gathering.Models.FK_Parents_Users" FromRole="AspNetUser" ToRole="Parent" />
           <NavigationProperty Name="AspNetRoles" Relationship="Gathering.Models.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Grades" Relationship="Gathering.Models.FK_Grades_Courses" FromRole="Cours" ToRole="Grade" />
+          <NavigationProperty Name="Teachers" Relationship="Gathering.Models.TeachersHaveCourses" FromRole="Cours" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Gathering.Models.FK_Parents_Users" FromRole="Parent" ToRole="AspNetUser" />
+          <NavigationProperty Name="Student" Relationship="Gathering.Models.FK_Parents_Students" FromRole="Parent" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Admins" Relationship="Gathering.Models.FK_Admins_Schools" FromRole="School" ToRole="Admin" />
+          <NavigationProperty Name="Students" Relationship="Gathering.Models.FK_Students_School" FromRole="School" ToRole="Student" />
+          <NavigationProperty Name="Teachers" Relationship="Gathering.Models.FK_Teachers_Schools" FromRole="School" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="aspnet_Users" Relationship="Gathering.Models.FK_Students_Users" FromRole="Student" ToRole="aspnet_Users" />
+          <NavigationProperty Name="Parents" Relationship="Gathering.Models.FK_Parents_Students" FromRole="Student" ToRole="Parent" />
+          <NavigationProperty Name="School" Relationship="Gathering.Models.FK_Students_School" FromRole="Student" ToRole="School" />
+          <NavigationProperty Name="Grades" Relationship="Gathering.Models.FK_Grades_Students" FromRole="Student" ToRole="Grade" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -1279,12 +1212,49 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_Admins_Users">
-          <End Type="Gathering.Models.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="aspnet_Users" Relationship="Gathering.Models.FK_Teachers_User" FromRole="Teacher" ToRole="aspnet_Users" />
+          <NavigationProperty Name="School" Relationship="Gathering.Models.FK_Teachers_Schools" FromRole="Teacher" ToRole="School" />
+          <NavigationProperty Name="Courses" Relationship="Gathering.Models.TeachersHaveCourses" FromRole="Teacher" ToRole="Cours" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="Grade1" Type="Double" />
+          <NavigationProperty Name="Cours" Relationship="Gathering.Models.FK_Grades_Courses" FromRole="Grade" ToRole="Cours" />
+          <NavigationProperty Name="Student" Relationship="Gathering.Models.FK_Grades_Students" FromRole="Grade" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_Admins_Schools">
+          <End Type="Gathering.Models.School" Role="School" Multiplicity="1" />
           <End Type="Gathering.Models.Admin" Role="Admin" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="aspnet_Users">
-              <PropertyRef Name="UserId" />
+            <Principal Role="School">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Admins_Users">
+          <End Type="Gathering.Models.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="Gathering.Models.Admin" Role="Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Admin">
               <PropertyRef Name="UserId" />
@@ -1475,6 +1445,78 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Parents_Users">
+          <End Type="Gathering.Models.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="Gathering.Models.Parent" Role="Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parent">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grades_Courses">
+          <End Type="Gathering.Models.Cours" Role="Cours" Multiplicity="1" />
+          <End Type="Gathering.Models.Grade" Role="Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parents_Students">
+          <End Type="Gathering.Models.Student" Role="Student" Multiplicity="1" />
+          <End Type="Gathering.Models.Parent" Role="Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parent">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_School">
+          <End Type="Gathering.Models.School" Role="School" Multiplicity="1" />
+          <End Type="Gathering.Models.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_Schools">
+          <End Type="Gathering.Models.School" Role="School" Multiplicity="1" />
+          <End Type="Gathering.Models.Teacher" Role="Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grades_Students">
+          <End Type="Gathering.Models.Student" Role="Student" Multiplicity="1" />
+          <End Type="Gathering.Models.Grade" Role="Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="aspnet_UsersInRoles">
           <End Type="Gathering.Models.aspnet_Roles" Role="aspnet_Roles" Multiplicity="*" />
           <End Type="Gathering.Models.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
@@ -1483,106 +1525,16 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <End Type="Gathering.Models.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="Gathering.Models.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
-        <Association Name="FK_Admins_Schools">
-          <End Type="Gathering.Models.School" Role="School" Multiplicity="1" />
-          <End Type="Gathering.Models.Admin" Role="Admin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="School">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Admin">
-              <PropertyRef Name="SchoolId" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="TeachersHaveCourses">
+          <End Type="Gathering.Models.Cours" Role="Cours" Multiplicity="*" />
+          <End Type="Gathering.Models.Teacher" Role="Teacher" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="GatheringModelsStoreContainer" CdmEntityContainer="GatheringContext">
-          <EntitySetMapping Name="Admins">
-            <EntityTypeMapping TypeName="Gathering.Models.Admin">
-              <MappingFragment StoreEntitySet="Admins">
-                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Courses">
-            <EntityTypeMapping TypeName="Gathering.Models.Cours">
-              <MappingFragment StoreEntitySet="Courses">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Parents">
-            <EntityTypeMapping TypeName="Gathering.Models.Parent">
-              <MappingFragment StoreEntitySet="Parents">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Schools">
-            <EntityTypeMapping TypeName="Gathering.Models.School">
-              <MappingFragment StoreEntitySet="Schools">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Students">
-            <EntityTypeMapping TypeName="Gathering.Models.Student">
-              <MappingFragment StoreEntitySet="Students">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Teachers">
-            <EntityTypeMapping TypeName="Gathering.Models.Teacher">
-              <MappingFragment StoreEntitySet="Teachers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Grades">
-            <EntityTypeMapping TypeName="Gathering.Models.Grade">
-              <MappingFragment StoreEntitySet="Grades">
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-                <ScalarProperty Name="Grade1" ColumnName="Grade" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="TeachersHaveCourses" TypeName="Gathering.Models.TeachersHaveCourses" StoreEntitySet="TeachersHaveCourses">
-            <EndProperty Name="Courses">
-              <ScalarProperty Name="Id" ColumnName="CourseId" />
-            </EndProperty>
-            <EndProperty Name="Teachers">
-              <ScalarProperty Name="Id" ColumnName="TeacherId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="Gathering.Models.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -1590,6 +1542,18 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="Gathering.Models.Admin">
+              <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1770,6 +1734,47 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="Gathering.Models.Cours">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parents">
+            <EntityTypeMapping TypeName="Gathering.Models.Parent">
+              <MappingFragment StoreEntitySet="Parents">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schools">
+            <EntityTypeMapping TypeName="Gathering.Models.School">
+              <MappingFragment StoreEntitySet="Schools">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="Gathering.Models.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="Gathering.Models.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -1778,6 +1783,27 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="Gathering.Models.Teacher">
+              <MappingFragment StoreEntitySet="Teachers">
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="Gathering.Models.Grade">
+              <MappingFragment StoreEntitySet="Grades">
+                <ScalarProperty Name="Grade1" ColumnName="Grade" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1795,6 +1821,14 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             </EndProperty>
             <EndProperty Name="AspNetRole">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TeachersHaveCourses" TypeName="Gathering.Models.TeachersHaveCourses" StoreEntitySet="TeachersHaveCourses">
+            <EndProperty Name="Teacher">
+              <ScalarProperty Name="Id" ColumnName="TeacherId" />
+            </EndProperty>
+            <EndProperty Name="Cours">
+              <ScalarProperty Name="Id" ColumnName="CourseId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
