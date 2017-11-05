@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Gathering.Services
 {
-    public static class UserService
+    public class UserService : Service
     {
     }
 }

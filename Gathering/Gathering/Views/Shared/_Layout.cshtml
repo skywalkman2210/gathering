@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Gathering.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -22,19 +23,25 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Dashboard", "Dashboard", "Home")</li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="Home/Grades">
-                            Grades
-                            <span class="caret" />
-                        </a>
-                        <ul class="dropdown-menu">
-                            @*TODO: Add the classes/periods dynamically from the DB*@
-                            <li>@Html.ActionLink("Class #1", "Index", "Grade")</li>
-                            <li>@Html.ActionLink("Class #2", "Index", "Grade")</li>
-                            <li>@Html.ActionLink("Class #3", "Index", "Grade")</li>
-                        </ul>
-                    </li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Dashboard", "Dashboard", "Home")</li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="Home/Grades">
+                                Grades
+                                <span class="caret" />
+                            </a>
+                            <ul class="dropdown-menu">
+                                @if (HttpContext.Current.Session["Courses"] != null)
+                                {
+                                    foreach (Course course in (HttpContext.Current.Session["Courses"] as IEnumerable<Course>))
+                                    {
+                                        <li>@Html.ActionLink(course.Name, "Index", "Course", new { id = course.Id }, null)</li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                    }
                     <li></li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                 </ul>
