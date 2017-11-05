@@ -21,12 +21,12 @@ namespace Gathering.Controllers
 
         public ActionResult Index(int id)
         {
-            var teacher = teacherService.GetAll().First(t => t.UserId == UserSession.User.Id);
-            var assignments = assignmentService.GetAll().Where(a => a.CourseId == id);
+            //var teacher = teacherService.GetAll().First(t => t.UserId == UserSession.User.Id);
+            //var assignments = assignmentService.GetAll().Where(a => a.CourseId == id);
 
-            ViewBag.Course = cService.Get(id);
-            ViewBag.Teacher = teacher;
-            ViewBag.Assignments = assignments;
+            //ViewBag.Course = cService.Get(id);
+            //ViewBag.Teacher = teacher;
+            //ViewBag.Assignments = assignments;
             return View();
         }
 

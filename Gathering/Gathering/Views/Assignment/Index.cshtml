@@ -11,16 +11,23 @@
 </head>
 <body>
     <table>
-        @if (ViewBag.AllAssignments)
+        @try
         {
-            foreach (var assignment in ViewBag.Assignments)
+            if (ViewBag.AllAssignments)
             {
-                <tr>
-                    <td>@assignment.Description</td>
-                    <td>@assignment.PointsEarned / @assignment.PointsTotal</td>
-                    <td>@assignment.DueDate</td>
-                </tr>
+                foreach (var assignment in ViewBag.Assignments)
+                {
+                    <tr>
+                        <td>@assignment.Description</td>
+                        <td>@assignment.PointsEarned / @assignment.PointsTotal</td>
+                        <td>@assignment.DueDate</td>
+                    </tr>
+                }
             }
+        }
+        catch
+        {
+
         }
     </table>
 </body>

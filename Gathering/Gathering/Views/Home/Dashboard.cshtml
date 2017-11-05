@@ -8,13 +8,14 @@
     <link href="@Url.Content("~/Content/Grades.css")" rel="stylesheet" type="text/css" />
 </head>
 <div id="tileContainer">
-    @foreach (Cours course in ViewBag.Courses)
-    {
-        <a href="@Url.Action("Index", "Grade", new {Id = course.Id})">
-            <div class="tile" id="tile @course.Id">
-                <p>@course.Name</p>
-                <p> Period Number / Section Number </p>
-            </div>
-        </a>
-    }
+    <a href="@Url.Action("Index", "Grade", "22")">
+        <div class="tile">
+            <p>IST 220: Secton 5</p>
+        </div>
+    </a>
+    <a href="@Url.Action("Index", "Grade", 23)">
+        <div class="tile">
+            <p>SRA 111: Secton 3</p>
+        </div>
+    </a>
 </div>
