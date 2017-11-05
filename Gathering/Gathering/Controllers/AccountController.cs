@@ -245,6 +245,21 @@ namespace Gathering.Controllers
                 AddErrors(result);
             }
 
+            var roles = db.AspNetRoles.AsEnumerable();
+            var schools = db.Schools.AsEnumerable();
+
+            ViewBag.AccountRoles = roles.Where(r => r.Id != "1").Select(r => new SelectListItem()
+            {
+                Text = r.Name,
+                Value = r.Id,
+            });
+
+            var schoolListItems = schools.Select(s => s.Name).ToList();
+
+            schoolListItems.Add("Other");
+
+            ViewBag.Schools = schoolListItems.AsEnumerable();
+
             // If we got this far, something failed, redisplay form
             return View(model);
         }
