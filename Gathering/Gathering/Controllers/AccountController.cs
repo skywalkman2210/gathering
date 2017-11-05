@@ -237,6 +237,8 @@ namespace Gathering.Controllers
                             break;
                     }
 
+                    this.db.SaveChanges();
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
