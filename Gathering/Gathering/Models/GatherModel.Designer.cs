@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\skywa\Desktop\Git\gathering\Gathering\Gathering\Models\GatherModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\jmccorri\Desktop\Gathering\Source\Gathering\Gathering\Models\GatherModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

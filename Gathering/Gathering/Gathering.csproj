@@ -392,10 +392,10 @@
     <Content Include="Views\Grade\Index.cshtml" />
     <Content Include="Views\Course\Index.cshtml" />
     <Content Include="Views\Grade\Add.cshtml" />
+    <Content Include="Views\Assignment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Assignment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

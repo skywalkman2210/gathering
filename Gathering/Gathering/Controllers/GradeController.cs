@@ -34,9 +34,10 @@ namespace Gathering.Controllers
                 {
                     Name = model.Name,
                     Description = model.Description,
+                    CourseNumber = model.CourseNumber,
                 });
 
-                Cours course = this.cService.GetAll().FirstOrDefault(c => c.Name == model.Name && c.Description == model.Description);
+                Cours course = this.cService.GetAll().FirstOrDefault(c => c.Name == model.Name && c.Description == model.Description && c.CourseNumber == model.CourseNumber);
                 var teacher = this.teacherService.GetAll().First(t => t.UserId == UserSession.User.Id);
                 this.teacherService.AddTeacherToCourse(teacher, course);
 
