@@ -1,0 +1,26 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        @if (ViewBag.AllCourses)
+        {
+            @foreach (var course in ViewBag.Courses)
+            {
+                <div class="courseTile">
+
+                </div>
+                <div data-id="@course.Id">@course.Name</div>
+            }
+        }
+    </div>
+</body>
+</html>
