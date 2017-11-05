@@ -10,8 +10,6 @@ namespace Gathering.Controllers
     [Authorize]
     public class CourseController : Controller
     {
-        private TeacherService tService = new TeacherService();
-        private StudentService sService = new StudentService();
         private CourseService cService = new CourseService();
 
         public ActionResult Index()

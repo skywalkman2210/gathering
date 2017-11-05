@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gathering.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,6 +22,7 @@ namespace Gathering.Controllers
         [Authorize]
         public ActionResult Dashboard()
         {
+            ViewBag.Courses = Session["Courses"] as IEnumerable<Course>;
             return View();
         }
 
