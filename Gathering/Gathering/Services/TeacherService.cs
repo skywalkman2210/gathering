@@ -40,12 +40,12 @@ namespace Gathering.Services
 #region Courses
         public List<Cours> GetTeacherCourses(int id)
         {
-            return this.Get(id).TeachersHaveCourses.Select(t => t.Cours).ToList();
+            return this.Get(id).Assignments.Select(t => t.Cours).ToList();
         }
 
         public void AddTeacherToCourse(Teacher teach, Cours obj)
         {
-            teach.TeachersHaveCourses.Add(new TeachersHaveCours()
+            teach.Assignments.Add(new Assignment()
             {
                 CourseId = obj.Id,
                 TeacherId = teach.Id,

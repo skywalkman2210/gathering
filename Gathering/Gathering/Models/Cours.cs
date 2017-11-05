@@ -17,6 +17,7 @@ namespace Gathering.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cours()
         {
+            this.Assignments = new HashSet<Assignment>();
             this.Grades = new HashSet<Grade>();
             this.TeachersHaveCourses = new HashSet<TeachersHaveCours>();
         }
@@ -26,6 +27,8 @@ namespace Gathering.Models
         public string Description { get; set; }
         public string CourseNumber { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Assignment> Assignments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Grade> Grades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

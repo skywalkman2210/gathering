@@ -11,21 +11,24 @@ namespace Gathering.Controllers
     public class AssignmentController : Controller
     {
         private AssignmentService assignmentService = new AssignmentService();
-
-        // GET: Assignment
-        public ActionResult Index()
-        {
-            return View();
-        }
+        private CourseService courseService = new CourseService();
+        private GradeService gradeService = new GradeService();
+        private StudentService studentService = new StudentService();
+        private TeacherService teacherService = new TeacherService();
 
         public ActionResult Index(int id)
         {
+            ViewBag.Assignment = assignmentService.GetAll().First(a => a.Id == id);
             return View();
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int courseId, int teacherId)
         {
-            var model = new AssignmentCreateViewModel();
+            var model = new AssignmentCreateViewModel()
+            {
+                CourseId = courseId,
+                TeacherId = teacherId,
+            };
             return View(model);
         }
 
@@ -40,7 +43,8 @@ namespace Gathering.Controllers
                     DueDate = model.DueDate,
                     PointsEarned = model.PointsTotal,
                     PointsTotal = model.PointsPossible,
-                    GradeId = model.GradeId,
+                    CourseId = model.CourseId,
+                    TeacherId = model.TeacherId,
                 });
 
                 var assignment = assignmentService.GetAll().First(a => a.Description == model.Description && a.DueDate == a.DueDate);
@@ -55,10 +59,10 @@ namespace Gathering.Controllers
         public ActionResult Delete(int id)
         {
             var assignment = assignmentService.Get(id);
-            var gradeId = assignment.GradeId;
+            var courseId = assignment.CourseId;
 
             assignmentService.Delete(assignment);
-            return RedirectToAction("Index", "Grade", new { id = gradeId });
+            return RedirectToAction("Index", "Grade", new { id = courseId });
         }
     }
 }

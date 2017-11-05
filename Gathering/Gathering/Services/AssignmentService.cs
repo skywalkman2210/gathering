@@ -38,9 +38,9 @@ namespace Gathering.Services
         #endregion
 
         #region Other
-        public void TeacherCreatesAssignment(Grade grade, Assignment assignment)
+        public void TeacherCreatesAssignment(Cours course, Assignment assignment)
         {
-            assignment.GradeId = grade.Id;
+            assignment.CourseId = course.Id;
             this.Create<Assignment>(assignment);
         }
         #endregion

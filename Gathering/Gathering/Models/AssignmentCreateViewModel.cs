@@ -9,7 +9,9 @@ namespace Gathering.Models
     {
         public string Description { get; set; }
 
-        public int GradeId { get; set; }
+        public int CourseId { get; set; }
+
+        public int TeacherId { get; set; }
 
         public int PointsPossible { get; set; }
 

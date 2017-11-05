@@ -15,12 +15,14 @@ namespace Gathering.Models
     public partial class Assignment
     {
         public int Id { get; set; }
-        public int GradeId { get; set; }
+        public int TeacherId { get; set; }
+        public int CourseId { get; set; }
         public string Description { get; set; }
         public Nullable<int> PointsEarned { get; set; }
         public int PointsTotal { get; set; }
         public Nullable<System.DateTime> DueDate { get; set; }
     
-        public virtual Grade Grade { get; set; }
+        public virtual Cours Cours { get; set; }
+        public virtual Teacher Teacher { get; set; }
     }
 }

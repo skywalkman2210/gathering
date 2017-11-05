@@ -26,9 +26,10 @@ namespace Gathering.Services
         {
             get
             {
-                return HttpContext.Current.Session["Courses"] == null
+                var Cours = HttpContext.Current.Session["Courses"] == null
                     ? new List<Cours>().AsEnumerable()
                     : HttpContext.Current.Session["Courses"] as IEnumerable<Cours>;
+                return Cours;
             }
             set
             {
@@ -47,6 +48,20 @@ namespace Gathering.Services
             set
             {
                 HttpContext.Current.Session["RoleType"] = value;
+            }
+        }
+
+        public static Cours CurrentCourse
+        {
+            get
+            {
+                return HttpContext.Current.Session["Courses"] == null
+                    ? new Cours()
+                    : HttpContext.Current.Session["Courses"] as Cours;
+            }
+            set
+            {
+                HttpContext.Current.Session["Courses"] = value;
             }
         }
     }

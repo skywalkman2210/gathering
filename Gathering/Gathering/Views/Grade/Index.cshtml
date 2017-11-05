@@ -1,60 +1,17 @@
 ﻿@{
     ViewBag.Title = "Grades";
 }
+<h2>@ViewBag.Title</h2>
 
-<style>
-    td, th {
-        border: 2px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-    table{
-        width: 100%;
-        font-size: 16px;
-    }
-    tr:nth-child(2n+2) {
-        background-color: #7F9D71;
-    }
-</style>
-<h2>@ViewBag.Course.Name (95.00%)</h2>
+<p>This is the course: @ViewBag.Course.Name</p>
 
-<!DOCTYPE html>
+@foreach (var assignment in ViewBag.Assignments)
+{
+    <a href="@Url.Action("Index", "Assignment", new { id = assignment.Id })">
+        <div class="assignmentTile">
+            @assignment.Description
+        </div>
+    </a>
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <table>
-        <tr>
-            <th>Assignment</th>
-            <th>Grade</th>
-            <th>Due Date</th>
-        </tr>
-        <tr>
-            <td>Exam #1</td>
-            <td>95 / 100 (95%)</td>
-            <td>11/05/17 07:54 AM</td>
-        </tr>
-        <tr>
-            <td>Exam #2</td>
-            <td>95 / 120 (95%)</td>
-            <td>11/05/17 07:54 AM</td>
-        </tr>
-        <tr>
-            <td>Exam #3</td>
-            <td>95 / 150 (95%)</td>
-            <td>11/05/17 07:54 AM</td>
-        </tr>
-        @*@foreach (var assignment in ViewBag.Assignments)
-        {
-            <tr>
-                <td>@assignment.Description</td>
-                <td>@assignment.PointsEarned / @assignment.PointsTotal</td>
-                <td>@assignment.DueDate</td>
-            </tr>
-        }*@
-    </table>
-</body>
-</html>
+<p>@Html.ActionLink("Add New Item", "Create", "Assignment", new { courseId = ViewBag.Course.Id, teacherId = ViewBag.Teacher.Id }, null)</p>

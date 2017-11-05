@@ -12,10 +12,21 @@ namespace Gathering.Controllers
     {
         private CourseService cService = new CourseService();
         private TeacherService teacherService = new TeacherService();
+        private AssignmentService assignmentService = new AssignmentService();
+
+        public GradeController()
+        {
+            cService.SetCoursesSession();
+        }
 
         public ActionResult Index(int id)
         {
+            var teacher = teacherService.GetAll().First(t => t.UserId == UserSession.User.Id);
+            var assignments = assignmentService.GetAll().Where(a => a.CourseId == id);
+
             ViewBag.Course = cService.Get(id);
+            ViewBag.Teacher = teacher;
+            ViewBag.Assignments = assignments;
             return View();
         }
 

@@ -213,7 +213,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="GradeId" Type="int" Nullable="false" />
+          <Property Name="TeacherId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="PointsEarned" Type="int" />
           <Property Name="PointsTotal" Type="int" Nullable="false" />
@@ -473,15 +474,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Assignments_Grades">
-          <End Role="Grades" Type="Self.Grades" Multiplicity="1" />
+        <Association Name="FK_Assignments_Courses">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
           <End Role="Assignments" Type="Self.Assignments" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Grades">
+            <Principal Role="Courses">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Assignments">
-              <PropertyRef Name="GradeId" />
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assignments_Teachers">
+          <End Role="Teachers" Type="Self.Teachers" Multiplicity="1" />
+          <End Role="Assignments" Type="Self.Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teachers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Assignments">
+              <PropertyRef Name="TeacherId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -749,8 +762,12 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Admins" EntitySet="Admins" />
           </AssociationSet>
-          <AssociationSet Name="FK_Assignments_Grades" Association="Self.FK_Assignments_Grades">
-            <End Role="Grades" EntitySet="Grades" />
+          <AssociationSet Name="FK_Assignments_Courses" Association="Self.FK_Assignments_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Assignments" EntitySet="Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assignments_Teachers" Association="Self.FK_Assignments_Teachers">
+            <End Role="Teachers" EntitySet="Teachers" />
             <End Role="Assignments" EntitySet="Assignments" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -912,8 +929,12 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Teacher" EntitySet="Teachers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Assignments_Grades" Association="Gathering.Models.FK_Assignments_Grades">
-            <End Role="Grade" EntitySet="Grades" />
+          <AssociationSet Name="FK_Assignments_Courses" Association="Gathering.Models.FK_Assignments_Courses">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="Assignment" EntitySet="Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assignments_Teachers" Association="Gathering.Models.FK_Assignments_Teachers">
+            <End Role="Teacher" EntitySet="Teachers" />
             <End Role="Assignment" EntitySet="Assignments" />
           </AssociationSet>
           <AssociationSet Name="FK_Grades_Courses" Association="Gathering.Models.FK_Grades_Courses">
@@ -1181,12 +1202,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GradeId" Type="Int32" Nullable="false" />
+          <Property Name="TeacherId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PointsEarned" Type="Int32" />
           <Property Name="PointsTotal" Type="Int32" Nullable="false" />
           <Property Name="DueDate" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="Grade" Relationship="Gathering.Models.FK_Assignments_Grades" FromRole="Assignment" ToRole="Grade" />
+          <NavigationProperty Name="Cours" Relationship="Gathering.Models.FK_Assignments_Courses" FromRole="Assignment" ToRole="Cours" />
+          <NavigationProperty Name="Teacher" Relationship="Gathering.Models.FK_Assignments_Teachers" FromRole="Assignment" ToRole="Teacher" />
         </EntityType>
         <EntityType Name="Cours">
           <Key>
@@ -1195,6 +1218,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Assignments" Relationship="Gathering.Models.FK_Assignments_Courses" FromRole="Cours" ToRole="Assignment" />
           <NavigationProperty Name="Grades" Relationship="Gathering.Models.FK_Grades_Courses" FromRole="Cours" ToRole="Grade" />
           <NavigationProperty Name="TeachersHaveCourses" Relationship="Gathering.Models.FK_TeachersHaveCourses_Courses" FromRole="Cours" ToRole="TeachersHaveCours" />
         </EntityType>
@@ -1205,7 +1229,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentId" Type="Int32" Nullable="false" />
           <Property Name="CourseId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Assignments" Relationship="Gathering.Models.FK_Assignments_Grades" FromRole="Grade" ToRole="Assignment" />
           <NavigationProperty Name="Cours" Relationship="Gathering.Models.FK_Grades_Courses" FromRole="Grade" ToRole="Cours" />
           <NavigationProperty Name="Student" Relationship="Gathering.Models.FK_Grades_Students" FromRole="Grade" ToRole="Student" />
         </EntityType>
@@ -1268,6 +1291,7 @@
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="SchoolId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Gathering.Models.FK_Teachers_User" FromRole="Teacher" ToRole="AspNetUser" />
+          <NavigationProperty Name="Assignments" Relationship="Gathering.Models.FK_Assignments_Teachers" FromRole="Teacher" ToRole="Assignment" />
           <NavigationProperty Name="School" Relationship="Gathering.Models.FK_Teachers_Schools" FromRole="Teacher" ToRole="School" />
           <NavigationProperty Name="TeachersHaveCourses" Relationship="Gathering.Models.FK_TeachersHaveCourses_Teachers" FromRole="Teacher" ToRole="TeachersHaveCours" />
         </EntityType>
@@ -1501,15 +1525,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Assignments_Grades">
-          <End Type="Gathering.Models.Grade" Role="Grade" Multiplicity="1" />
+        <Association Name="FK_Assignments_Courses">
+          <End Type="Gathering.Models.Cours" Role="Cours" Multiplicity="1" />
           <End Type="Gathering.Models.Assignment" Role="Assignment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Grade">
+            <Principal Role="Cours">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Assignment">
-              <PropertyRef Name="GradeId" />
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assignments_Teachers">
+          <End Type="Gathering.Models.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="Gathering.Models.Assignment" Role="Assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Assignment">
+              <PropertyRef Name="TeacherId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1817,7 +1853,8 @@
                 <ScalarProperty Name="PointsTotal" ColumnName="PointsTotal" />
                 <ScalarProperty Name="PointsEarned" ColumnName="PointsEarned" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="GradeId" ColumnName="GradeId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
