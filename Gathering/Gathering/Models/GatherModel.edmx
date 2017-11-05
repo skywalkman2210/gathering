@@ -819,7 +819,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <EntitySet Name="AspNetUserClaims" EntityType="Gathering.Models.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Gathering.Models.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Gathering.Models.AspNetUser" />
-          <EntitySet Name="Courses" EntityType="Gathering.Models.Cours" />
+          <EntitySet Name="Courses1" EntityType="Gathering.Models.Course" />
           <EntitySet Name="Parents" EntityType="Gathering.Models.Parent" />
           <EntitySet Name="Schools" EntityType="Gathering.Models.School" />
           <EntitySet Name="Students" EntityType="Gathering.Models.Student" />
@@ -899,7 +899,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             <End Role="Teacher" EntitySet="Teachers" />
           </AssociationSet>
           <AssociationSet Name="FK_Grades_Courses" Association="Gathering.Models.FK_Grades_Courses">
-            <End Role="Cours" EntitySet="Courses" />
+            <End Role="Cours" EntitySet="Courses1" />
             <End Role="Grade" EntitySet="Grades" />
           </AssociationSet>
           <AssociationSet Name="FK_Parents_Students" Association="Gathering.Models.FK_Parents_Students">
@@ -927,7 +927,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
           <AssociationSet Name="TeachersHaveCourses" Association="Gathering.Models.TeachersHaveCourses">
-            <End Role="Cours" EntitySet="Courses" />
+            <End Role="Cours" EntitySet="Courses1" />
             <End Role="Teacher" EntitySet="Teachers" />
           </AssociationSet>
         </EntityContainer>
@@ -1154,7 +1154,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <NavigationProperty Name="Teachers" Relationship="Gathering.Models.FK_Teachers_User" FromRole="AspNetUser" ToRole="Teacher" />
           <NavigationProperty Name="AspNetRoles" Relationship="Gathering.Models.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
-        <EntityType Name="Cours">
+        <EntityType Name="Course">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -1234,7 +1234,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <Property Name="StudentId" Type="Int32" Nullable="false" />
           <Property Name="CourseId" Type="Int32" Nullable="false" />
           <Property Name="Grade1" Type="Double" />
-          <NavigationProperty Name="Cours" Relationship="Gathering.Models.FK_Grades_Courses" FromRole="Grade" ToRole="Cours" />
+          <NavigationProperty Name="Course" Relationship="Gathering.Models.FK_Grades_Courses" FromRole="Grade" ToRole="Cours" />
           <NavigationProperty Name="Student" Relationship="Gathering.Models.FK_Grades_Students" FromRole="Grade" ToRole="Student" />
         </EntityType>
         <Association Name="FK_Admins_Schools">
@@ -1458,7 +1458,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Grades_Courses">
-          <End Type="Gathering.Models.Cours" Role="Cours" Multiplicity="1" />
+          <End Type="Gathering.Models.Course" Role="Cours" Multiplicity="1" />
           <End Type="Gathering.Models.Grade" Role="Grade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cours">
@@ -1526,7 +1526,7 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
           <End Type="Gathering.Models.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
         <Association Name="TeachersHaveCourses">
-          <End Type="Gathering.Models.Cours" Role="Cours" Multiplicity="*" />
+          <End Type="Gathering.Models.Course" Role="Cours" Multiplicity="*" />
           <End Type="Gathering.Models.Teacher" Role="Teacher" Multiplicity="*" />
         </Association>
         </Schema>
@@ -1734,8 +1734,8 @@ warning 6002: The table/view 'Gathering.dbo.TeachersHaveCourses' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Courses">
-            <EntityTypeMapping TypeName="Gathering.Models.Cours">
+          <EntitySetMapping Name="Courses1">
+            <EntityTypeMapping TypeName="Gathering.Models.Course">
               <MappingFragment StoreEntitySet="Courses">
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

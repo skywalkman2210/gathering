@@ -18,7 +18,7 @@ namespace Gathering.Models
         public int CourseId { get; set; }
         public Nullable<double> Grade1 { get; set; }
     
-        public virtual Cours Cours { get; set; }
+        public virtual Course Course { get; set; }
         public virtual Student Student { get; set; }
     }
 }
