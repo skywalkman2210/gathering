@@ -152,17 +152,9 @@ namespace Gathering.Controllers
                 Value = r.Id,
             });
 
-            var schoolListItems = schools.Select(s => new SelectListItem()
-            {
-                Text = s.Name,
-                Value = s.Id.ToString(),
-            }).ToList();
+            var schoolListItems = schools.Select(s => s.Name).ToList();
 
-            schoolListItems.Add(new SelectListItem()
-            {
-                Text = "Other",
-                Value = "0",
-            });
+            schoolListItems.Add("Other");
 
             ViewBag.Schools = schoolListItems.AsEnumerable();
 
@@ -181,9 +173,8 @@ namespace Gathering.Controllers
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
 
                 var roleId = Convert.ToInt32(model.AccountRole);
-                var schoolId = Convert.ToInt32(model.SchoolName);
                 
-                if (schoolId == 0)
+                if (model.SchoolName == "Other")
                 {
                     this.db.Schools.Add(new School()
                     {
