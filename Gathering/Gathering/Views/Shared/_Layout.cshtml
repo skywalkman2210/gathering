@@ -36,7 +36,7 @@
                                 {
                                     foreach (Course course in (HttpContext.Current.Session["Courses"] as IEnumerable<Course>))
                                     {
-                                        <li>@Html.ActionLink(course.Name, "Index", "Course", new { id = course.Id }, null)</li>
+                                        <li>@Html.ActionLink(course.Name, "Index", "Grade", new { id = course.Id }, null)</li>
                                     }
                                 }
                             </ul>

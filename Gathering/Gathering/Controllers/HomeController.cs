@@ -1,4 +1,5 @@
 ﻿using Gathering.Models;
+using Gathering.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace Gathering.Controllers
 {
     public class HomeController : Controller
     {
+        private CourseService cService = new CourseService();
+
         public ActionResult Index()
         {
             if (Request.IsAuthenticated)
@@ -24,7 +27,7 @@ namespace Gathering.Controllers
         {
             ViewBag.Courses = Session["Courses"] as IEnumerable<Course> == null
                 ? new List<Course>()
-                : Session["Courses"] as IEnumerable<Course>; ;
+                : Session["Courses"] as IEnumerable<Course>; 
             return View();
         }
 
