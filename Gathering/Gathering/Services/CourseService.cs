@@ -36,5 +36,25 @@ namespace Gathering.Services
             this.Delete(obj);
         }
         #endregion
+
+        #region Other
+
+        public void SetCoursesSession()
+        {
+            switch (UserSession.RoleType)
+            {
+                case RoleType.Teacher:
+                    var teacher = GetAll<Teacher>().First(s => s.AspNetUser.UserName == UserSession.User.Email);
+                    UserSession.Courses = teacher.Courses.AsEnumerable();
+                    break;
+                case RoleType.Student:
+                    var student = GetAll<Student>().First(s => s.AspNetUser.UserName == UserSession.User.Email);
+                    UserSession.Courses = this.GetStudentCourses(student.Id);
+                    break;
+                default:
+                    break;
+            }
+        }
+#endregion
     }
 }

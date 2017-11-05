@@ -38,18 +38,7 @@ namespace Gathering.Services
         #endregion
 
         #region Courses
-        public List<Course> GetStudentCourses(int id)
-        {
-            var grades = this.Get(id).Grades;
-            var courses = this.GetAll<Course>();
-
-            var select = grades.Join(courses, 
-                g => g.CourseId, 
-                c => c.Id, (g, c) => new { Grade = g, Course = c }
-            ).Where(c => c.Grade.StudentId == id);
-
-            return select.Select(s => s.Course).ToList();
-        }
+        
 
         public List<Grade> GetStudentGrades(int id)
         {

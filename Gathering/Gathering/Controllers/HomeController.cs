@@ -12,6 +12,11 @@ namespace Gathering.Controllers
     {
         private CourseService cService = new CourseService();
 
+        public HomeController()
+        {
+            this.cService.SetCoursesSession();
+        }
+
         public ActionResult Index()
         {
             if (Request.IsAuthenticated)
@@ -25,9 +30,7 @@ namespace Gathering.Controllers
         [Authorize]
         public ActionResult Dashboard()
         {
-            ViewBag.Courses = Session["Courses"] as IEnumerable<Course> == null
-                ? new List<Course>()
-                : Session["Courses"] as IEnumerable<Course>; 
+            ViewBag.Courses = UserSession.Courses; 
             return View();
         }
 

@@ -26,5 +26,18 @@ namespace Gathering.Services
             this.db.Set<TEntity>().Remove(obj);
             this.db.SaveChanges();
         }
+
+        public List<Course> GetStudentCourses(int id)
+        {
+            var grades = this.GetAll<Student>().First(s => s.Id == id).Grades;
+            var courses = this.GetAll<Course>();
+
+            var select = grades.Join(courses,
+                g => g.CourseId,
+                c => c.Id, (g, c) => new { Grade = g, Course = c }
+            ).Where(c => c.Grade.StudentId == id);
+
+            return select.Select(s => s.Course).ToList();
+        }
     }
 }

@@ -23,12 +23,14 @@ namespace Gathering.Controllers
         private GatheringContext db;
         private CourseService courseService;
         private StudentService studentService;
+        private TeacherService teacherService;
 
         public AccountController()
         {
             this.db = new GatheringContext();
             this.courseService = new CourseService();
             this.studentService = new StudentService();
+            this.teacherService = new TeacherService();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -89,18 +91,23 @@ namespace Gathering.Controllers
             {
                 case SignInStatus.Success:
                     var user = this.db.AspNetUsers.First(u => u.UserName == model.Email);
+                    UserSession.User = user;
+
                     var role = user.AspNetRoles.First();
 
                     switch(role.Id)
                     {
+                        case "2":
+                            UserSession.RoleType = RoleType.Teacher;
+                            break;
                         case "3":
-                            var student = this.studentService.GetAll().First(s => s.AspNetUser.UserName == model.Email);
-                            var courses = studentService.GetStudentCourses(student.Id);
-                            this.HttpContext.Session["Courses"] = courses;
+                            UserSession.RoleType = RoleType.Student;
                             break;
                         default:
                             break;
                     }
+
+                    this.courseService.SetCoursesSession();
 
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -209,6 +216,8 @@ namespace Gathering.Controllers
                 {
                     AspNetRole role = db.AspNetRoles.First(r => r.Id == model.AccountRole);
                     var foundUser = db.AspNetUsers.First(u => u.UserName == model.Email);
+                    UserSession.User = foundUser;
+
                     role.AspNetUsers.Add(foundUser);
 
                     var schoolWithId = this.db.Schools.First(s => s.Name == model.SchoolName);

@@ -1,4 +1,5 @@
 ﻿@using Gathering.Models
+@using Gathering.Services
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,12 +33,9 @@
                                 <span class="caret" />
                             </a>
                             <ul class="dropdown-menu">
-                                @if (HttpContext.Current.Session["Courses"] != null)
+                                @foreach (Course course in UserSession.Courses)
                                 {
-                                    foreach (Course course in (HttpContext.Current.Session["Courses"] as IEnumerable<Course>))
-                                    {
-                                        <li>@Html.ActionLink(course.Name, "Index", "Grade", new { id = course.Id }, null)</li>
-                                    }
+                                    <li>@Html.ActionLink(course.Name, "Index", "Grade", new { id = course.Id }, null)</li>
                                 }
                             </ul>
                         </li>
